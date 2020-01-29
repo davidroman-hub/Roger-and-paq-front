@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 // Core
 
 import Home from './core/Home'
-
+import Menu from './core/Menu'
 // User
 
 import Signin from './user/Signin'
@@ -18,6 +18,7 @@ const Routes = () => {
   return(
     <BrowserRouter>
       <Switch>
+        <Menu/>
         <Route path='/' exact component = { Home }/>
         <Route path='/signin' exact component = { Signin } /> 
         <Route path='/signup' exact component = { Signup } /> 

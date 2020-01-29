@@ -1,10 +1,43 @@
 import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
 
+const isActive = (history, path) =>{
+    if(history.location.pathname === path){
+        return{color:'#ff9900'}
+    } else{
+        return{'color': '#000'}
+    }
+}
+
+
+const Menu = ({history}) =>( 
+
+    <div> 
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <Link class="nav-link" to='/'>Logo</Link>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      {/* <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> */}
+                    <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link>
+                    <Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Sign In</Link>
+                    <Link className="nav-link" style={isActive(history,'/signup')} to="/signup">Sign up</Link>
+  </div>
+  </div>
+</nav>
+
+    </div>
+
+
+     
 
 
 
-
-const Menu = () => <div> Menu</div>
+)
 
 export default withRouter(Menu)
