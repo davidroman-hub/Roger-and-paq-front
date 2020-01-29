@@ -17,11 +17,12 @@ import Signup from './user/Signup'
 const Routes = () => { 
   return(
     <BrowserRouter>
-      <Switch>
-        <Menu/>
-        <Route path='/' exact component = { Home }/>
-        <Route path='/signin' exact component = { Signin } /> 
-        <Route path='/signup' exact component = { Signup } /> 
+      <Menu/>
+      
+      <Switch>  
+          <Route path = '/' exact component = { Home }/>
+          <Route path = '/signin' exact component = { Signin } /> 
+          <Route path = '/signup' exact component = { Signup } /> 
       </Switch>
     </BrowserRouter>
   )
