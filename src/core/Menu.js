@@ -1,5 +1,7 @@
 import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
+import Logo from './logo.png'
+import './Menu.scss'
 
 const isActive = (history, path) =>{
     if(history.location.pathname === path){
@@ -13,11 +15,15 @@ const isActive = (history, path) =>{
 const Menu = ({history}) =>( 
 
     <div> 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <Link class="nav-link" to='/'>Logo</Link>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <Link className='nav-color' class="nav-link" to='/'>
+      <img alt='logo' width='60px' height='60px' src={Logo}/>
+    </Link>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       {/* <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
