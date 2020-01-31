@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-//import {API} from '../Config' 
+import {API} from '../Config' 
 import Layout from '../core/Layout'
 import './Signup.scss'
 
@@ -17,6 +17,34 @@ const Signup = () => {
         error:'',
         success:false
     });
+
+    //Unstructuring the code 
+
+    const {name, email, password} = values
+
+    const clickSubmit = event => {
+        event.preventDefault();
+        signup({name, email, password}) //<-- i changed for an object {} to i can use in user 
+    }
+
+    // Signup method: 
+
+    const signup = user => { //The argument user come from clickSubmit otherwise i have to use  const signup = (name, email, password)
+      //  console.log(name, email, password) 
+        fetch(`${API}/signup`,{
+            method:"POST",
+            headers:{
+                Accept:'application/json',
+                "Content-Type" : "application/json"
+            },body:JSON.stringify(user)
+        })
+        .then(response => {
+            return response.json()
+        } )
+        .catch(err => {
+            console.log(err);
+        });
+    };
 
 
     //funtion to take the state
@@ -47,7 +75,7 @@ const Signup = () => {
                 </label>
             </p>
         </div> 
-            <button >Submit</button> 
+            <button onClick={clickSubmit} >Submit</button> 
     </form>
     
     )
@@ -59,6 +87,7 @@ const Signup = () => {
        {/* {API} */}
         {signUpForm()}
         {JSON.stringify(values)}
+
     </Layout>)
 }
 export default Signup
