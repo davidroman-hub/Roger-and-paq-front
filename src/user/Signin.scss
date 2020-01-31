@@ -1,0 +1,55 @@
+*{
+    box-sizing: border-box;
+    
+}
+
+.SignIpForm{
+    max-width: 420px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: 500;
+}
+input[type=text],input[type=email],input[type=password]{
+    width: 140%;// largo del input
+    padding:12px ;//altura entre cada una de las secciones
+    border: 1px solid #ccc;// el borde del input
+    border-radius: 4px;//circunferencia del input
+    box-sizing: border-box;
+    margin-top: 6px;//un poco de altura
+    margin-bottom: 16px;
+    resize: vertical;
+    font-family: sans-serif;
+}
+
+
+// button {
+//     background-color: #d79e5b;
+//     color: black;
+//     padding: 12px 20px;
+//     border: none;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     font-family: sans-serif;
+//     transition: 0.5 linear;
+ 
+// }
+button {
+        
+       
+    background-color: #d79e5b;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 400;
+    transition: 0.3s linear
+   
+}
+button:hover{ 
+background-color: #624e38;
+
+}
+
