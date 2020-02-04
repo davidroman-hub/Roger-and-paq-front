@@ -72,3 +72,18 @@ export const signout = (next) => {
         .catch ( err => console.log(err))
     }
 }
+//helper authenticate , this method works if the user is auth, and will change
+// the links at the top. will hide signin links conditionally
+
+export const isAuth = () => { 
+
+        if (typeof window == 'undefined') { 
+            return false
+        }
+
+        if(localStorage.getItem('jwt')) { 
+            return JSON.parse(localStorage.getItem('jwt'))
+        } else { 
+            return false
+        }
+}

@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Link, withRouter} from 'react-router-dom'
-import {signout} from '../auth/index'
+import {signout, isAuth} from '../auth/index'
 
 
 import Logo from './logo.png'
@@ -17,8 +17,8 @@ const isActive = (history, path) =>{
 
 const Menu = ({history}) =>( 
 
-    <div> 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div> 
+  <ul class="navbar navbar-expand-lg navbar-light bg-light">
     <Link className='nav-color' class="nav-link" to='/'>
       <img alt='logo' width='60px' height='60px' src={Logo}/>
     </Link>
@@ -33,13 +33,23 @@ const Menu = ({history}) =>(
       <a class="nav-item nav-link" href="#">Features</a>
       <a class="nav-item nav-link" href="#">Pricing</a>
       <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> */}
-    <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link>
-    <Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Sign In</Link>
-    <Link className="nav-link" style={isActive(history,'/signup')} to="/signup">Sign up</Link>
-    <span className="nav-link" style={{cursor:'pointer', color:'#000'}} onClick={()=> signout (()=>{history.push('/');})} >Sign out</span>
+   <li> <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link></li>
+   
+   {!isAuth () && ( 
+   <Fragment><li><Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Inicia Sesión </Link></li>
+             <li> <Link className="nav-link" style={isActive(history,'/signup')} to="/signup"> Crea tu usuario </Link></li>
+   </Fragment>)}
+   
+   {isAuth () && (
+     <span className="nav-link" 
+     style={{cursor:'pointer', color:'#000'}} 
+     onClick={() => signout 
+      (()=>{history.push('/');})} > Salir de la sesión </span>
+   )}
+    
   </div>
   </div>
-</nav>
+</ul>
 
     </div>
 
