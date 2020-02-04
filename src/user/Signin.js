@@ -51,7 +51,7 @@ const clickSubmit = (event) => {
 };
 
 const signInForm = () =>( 
-    <form  className='SignUpForm'>
+    <form  className='SignInForm'>
         
         <div className = 'container'>
            

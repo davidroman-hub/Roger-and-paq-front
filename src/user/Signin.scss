@@ -3,15 +3,15 @@
     
 }
 
-.SignIpForm{
+ .SignInForm  {
     max-width: 420px;
     margin: 0 auto;
     font-family: sans-serif;
     text-align: center;
     font-weight: 500;
-}
+ }
 input[type=text],input[type=email],input[type=password]{
-    width: 140%;// largo del input
+    width: 100%;// largo del input
     padding:12px ;//altura entre cada una de las secciones
     border: 1px solid #ccc;// el borde del input
     border-radius: 4px;//circunferencia del input
@@ -34,9 +34,9 @@ input[type=text],input[type=email],input[type=password]{
 //     transition: 0.5 linear;
  
 // }
-button {
+.SignInForm button {
         
-       
+      
     background-color: #d79e5b;
     color: black;
     padding: 12px 20px;
