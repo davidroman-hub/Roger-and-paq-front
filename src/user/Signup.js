@@ -52,9 +52,6 @@ const Signup = () => {
 
 
 
-      
-
-
     //funtion to take the state
 
     const handleChange = name => event=> {

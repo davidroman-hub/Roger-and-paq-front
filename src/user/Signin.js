@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Redirect}from 'react-router-dom'
 import Layout from '../core/Layout'
-import {signin} from '../auth/index'
+import {signin, authenticate} from '../auth/index'
 import './Signin.scss'
 
 
@@ -9,8 +9,8 @@ const Signin = () =>{
 
     //state
     const [values, setValues] = useState({
-        email:'',
-        password:'',
+        email:'jobroman8999@gmail.com',
+        password:'12345679',
         error:'',
         loading:false,
         redirectToReferrer: false, // to redirect qhen the sign in its succes
@@ -40,10 +40,12 @@ const clickSubmit = (event) => {
         if(data.error){
             setValues({...values, error: data.error, loading: false}) //if the form is bad it will be succes false
         } else {
-            setValues({
-                ...values,//<-- we want to use all the values
-               redirectToReferrer:true // if everything its correct it will be true
-            });
+            authenticate(data, () => { 
+                setValues({
+                    ...values,//<-- we want to use all the values
+                   redirectToReferrer:true // if everything its correct it will be true
+                });
+            })
         };
     });
 };
@@ -91,7 +93,7 @@ const signInForm = () =>(
  };
 
  return(
-    <Layout title='Sign up Page' 
+    <Layout title='Sign in Page' 
     description="Sign un to Node React e-Commerce app"
     className="container col-md-8 offset-md-2">   
 
