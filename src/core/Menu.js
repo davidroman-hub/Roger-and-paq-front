@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {Link, withRouter} from 'react-router-dom'
+import {signout} from '../auth/index'
+
+
 import Logo from './logo.png'
 import './Menu.scss'
 
@@ -33,7 +36,7 @@ const Menu = ({history}) =>(
     <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link>
     <Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Sign In</Link>
     <Link className="nav-link" style={isActive(history,'/signup')} to="/signup">Sign up</Link>
- 
+    <span className="nav-link" style={{cursor:'pointer', color:'#000'}} onClick={()=> signout (()=>{history.push('/');})} >Sign out</span>
   </div>
   </div>
 </nav>
