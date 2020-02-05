@@ -21,7 +21,7 @@ const Signin = () =>{
 
 const {email, password, error, loading, redirectToReferrer } = values
 
-const{user} = isAuth
+const{user} = isAuth()
 // funtion will return another function for take the state
  
 
@@ -87,15 +87,24 @@ const signInForm = () =>(
          )
  };
 
- const redirectUser = () => { 
-     if(redirectToReferrer){
-        if (user && user.role === 1) {
-            return <Redirect to='admin/dashboard'/>
-        } else { 
-            return <Redirect to ='user/dashboard'/>
-        }
-     };
- };
+//  const redirectUser = () => { 
+//      if(redirectToReferrer){
+//         if(user && user.role === 1) {
+//             return <Redirect to='/admin/dashbord'/>
+//         } else {
+//              return <Redirect to='/user/dashboard'/>
+//         }
+//      };
+//  };
+const redirectUser = () => { 
+    if(redirectToReferrer){
+       if(user && user.role === 1) {
+           return <Redirect to='admin/dashbord'/>
+       } else {
+            return <Redirect to='/user/dashboard'/>
+       }
+    }
+}
 
  return(
     <Layout title='Sign in Page' 

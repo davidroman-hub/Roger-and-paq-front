@@ -34,9 +34,10 @@ const Menu = ({history}) =>(
       <a class="nav-item nav-link" href="#">Pricing</a>
       <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> */}
    <li> <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link></li>
-   <li> <Link className="nav-link" style={isActive(history,'/user/dashboard')} to="/user/dashboard">Dashboard</Link></li>
+   <li> <Link className="nav-link" style={isActive(history,'user/dashboard')} to="user/dashboard">Dashboard</Link></li>
    {!isAuth () && ( 
-   <Fragment><li><Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Inicia Sesión </Link></li>
+   <Fragment>
+             <li><Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Inicia Sesión </Link></li>
              <li> <Link className="nav-link" style={isActive(history,'/signup')} to="/signup"> Crea tu usuario </Link></li>
    </Fragment>)}
    
