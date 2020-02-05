@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Redirect}from 'react-router-dom'
 import Layout from '../core/Layout'
-import {signin, authenticate} from '../auth/index'
+import {signin, authenticate, isAuth} from '../auth/index'
 import './Signin.scss'
 
 
@@ -21,6 +21,7 @@ const Signin = () =>{
 
 const {email, password, error, loading, redirectToReferrer } = values
 
+const{user} = isAuth
 // funtion will return another function for take the state
  
 
@@ -88,7 +89,11 @@ const signInForm = () =>(
 
  const redirectUser = () => { 
      if(redirectToReferrer){
-         return <Redirect to='/'/>
+        if (user && user.role === 1) {
+            return <Redirect to='admin/dashboard'/>
+        } else { 
+            return <Redirect to ='user/dashboard'/>
+        }
      };
  };
 

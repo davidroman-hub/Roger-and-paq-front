@@ -1,10 +1,13 @@
 import React from 'react'
 import Layout from '../core/Layout'
+import {isAuth} from '../auth/index'
 
 
 
 
 const Dashboard = () => {
+
+    const {user:{_id, name, email, role}} = isAuth ()
    
     return (
 
@@ -13,13 +16,14 @@ const Dashboard = () => {
                 <h3 className='card-header'>Información del Usuario</h3>
                 <ul className='list-group'>
                     <li className='list-group-item'>
-                        name
+                        
+                        {name}
                     </li>
                     <li className='list-group-item'>
-                        email
+                        {email}
                     </li>
                     <li className='list-group-item'>
-                        role
+                        {role === 1 ? 'admin' : ' Usuario Registrado'}
                     </li>
                 </ul>
             </div>
