@@ -34,12 +34,34 @@ const Menu = ({history}) =>(
       <a class="nav-item nav-link" href="#">Pricing</a>
       <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> */}
    <li> <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link></li>
-   <li> <Link className="nav-link" style={isActive(history,'user/dashboard')} to="user/dashboard">Dashboard</Link></li>
+  
+  {/* for the user conditional redirect  */}
+
+    {isAuth() && isAuth().user.role === 0 &&(
+         <li> <Link className="nav-link" 
+         style={isActive(history,'user/dashboard')} 
+         to="user/dashboard">Dashboard</Link></li>
+    )}
+
+    {/* For the Admin conditional redirect */}
+
+{isAuth() && isAuth().user.role === 1 &&(
+         <li> <Link className="nav-link" 
+         style={isActive(history,'admin/dashboard')} 
+         to="admin/dashboard"> Admin Dashboard</Link></li>
+    )}
+
+   
+   
+   
    {!isAuth () && ( 
    <Fragment>
              <li><Link className="nav-link" style={isActive(history,'/signin')} to="/signin">Inicia Sesión </Link></li>
              <li> <Link className="nav-link" style={isActive(history,'/signup')} to="/signup"> Crea tu usuario </Link></li>
    </Fragment>)}
+   
+   
+   
    
    {isAuth () && (
      <span className="nav-link" 
