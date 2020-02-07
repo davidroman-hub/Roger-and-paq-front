@@ -7,15 +7,20 @@ import AdminRoute from './auth/AdminRoute'
 
 import Home from './core/Home'
 import Menu from './core/Menu'
+
+
 // User
 
 import Signin from './user/Signin'
 import Signup from './user/Signup'
 import Dashboard from './user/userDashboard'
+
+
+
+//Admin
 import AdminDashboard from './user/AdminDashboard'
 import AddCategory from './admin/AddCategory'
-
-
+import AddProduct from './admin/AddProduct'
 
 const Routes = () => { 
   return(
@@ -35,7 +40,7 @@ const Routes = () => {
 
               <AdminRoute path='/admin/dashboard' exact component = { AdminDashboard}/>
               <AdminRoute path='/create/categories' exact component = {AddCategory}/>
-
+              <AdminRoute path='/create/product' exact component = {AddProduct}/>
 
       </Switch>
     </BrowserRouter>
