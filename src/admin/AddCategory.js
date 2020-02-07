@@ -3,6 +3,12 @@ import React,{useState} from 'react'
 import Layout from '../core/Layout'
 import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
+import{createCategory} from './apiAdmin'
+
+
+
+
+
 
 const AddCategory = () => { 
 
@@ -29,20 +35,56 @@ const clickSubmit = (e) => {
     setSuccess(false)
      
     
-    //make request to API to create category
+//make request to API to create category
+createCategory(user._id, token,{name})
+.then( data => {
+    if(data.error){
+        setError(true)
+    } else {
+        setError('')
+        setSuccess(true)
+        }
+    })
 };
+
+// Method for Show error and success of the new category
+
+const showSuccess = () => { 
+    if(success){
+        return<h3 className='text-success'>{name} Ha sido creado</h3>
+    }
+}
+
+const showError = () => { 
+    if(error){
+        return<h3 className='text-danger'> La categoria debe ser unica! crea otra con nombre diferente</h3>
+    }
+}
+
+
+// button for go back
+
+const goBack= () => (
+    <div className='mt-5'>
+        <Link to='/admin/dashboard' className='text-warning'>Vuelve al inicio</Link>
+    </div>
+)
+
+
 
 const newCategoryForm = () => (
 
     <form onSubmit = {clickSubmit}>
         <div className='form-group'>
             <label className='text-muted'>
-                Nombre
+                Name
             </label>
             <input type='text'
             className='form-control'
             onChange={handleChange}
             value={name}
+            autoFocus
+            required //<-- need to be something inside of the input
             />
 
         </div>
@@ -63,6 +105,9 @@ return (
         <div className='row'>
             <div className='col-md-8 offset-md-2' >
                 {newCategoryForm()}
+                {showError()}
+                {showSuccess()}
+                {goBack()}
             </div>
         </div>
 

@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../core/Layout'
 import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
-import {AddCategory} from '../admin/AddCategory'
+
 
 
 
