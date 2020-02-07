@@ -7,6 +7,171 @@ import { createProduct } from './apiAdmin'
 
 const AddProduct = () => {
 
+//State
+
+const [values, setValues] = useState({//<-- have to be an object because we gonna send props
+
+    name:'',
+    description:'',
+    price:'',
+    categories:[], //<-- we gonna put the categories from the backend
+    category:'',
+    shipping:'',
+    quantity:'',
+    photo:'',
+    loading:false,
+    error:'',
+    createdProduct:'',
+    redirectToProfile:false,
+    formData:''
+})
+
+
+// destructure of the same state:
+
+const {
+
+    name,
+    description,
+    price,
+    categories, //<-- we gonna put the categories from the backend
+    category,
+    shipping,
+    quantity,
+    photo,
+    loading,
+    error,
+    createdProduct,
+    redirectToProfile,
+    formData // <--  we gonna send this to the backend
+
+} = values;
+
+useEffect(() => { 
+    setValues({...values, formData: new FormData()}); //<-- thats why we used here
+}, [])
+
+
+const handleChange = name => event => {
+    const value = name === 'photo' ? event.target.files[0]: event.target.value;
+    formData.set(name, value);//<-- first we gonna take the fisrt value 'name' and after we gonna take the other values
+    setValues({...values, [name]: value})
+}
+
+const clickSubmit= (event) => { 
+    //
+}
+
+
+
+const newPostForm = () => {
+    
+    return(
+    
+    
+    <form className='product-form' onSubmit={clickSubmit}>
+        <h4>Agrega una foto</h4>
+        <div className='container'>
+            <label className='btn btn-secondary'>
+                <input
+                    onChange={handleChange('photo')}
+                    type='file'
+                    name='photo'
+                    accept='image/*'
+                />
+            </label>
+        </div>
+
+        <form className='mb-3' onSubmit={clickSubmit}>
+
+
+
+<div className='form-group'>
+    <label className='text-muted'>  </label>
+        <input 
+            placeholder='Nombre del producto'
+            onChange={handleChange('name')} 
+            type='text' 
+            className='form-control' 
+            value={name} />
+</div>
+
+
+
+
+<div className='form-group'>
+    <label className='text-muted'></label>
+        <textarea 
+            placeholder='descripcion del producto'
+            onChange={handleChange('description')}  
+            className='form-control' 
+            value={description} />
+</div>
+
+<div className='form-group'>
+    <label className='text-muted'> Precio </label>
+        <input 
+            onChange={handleChange('price')} 
+            type='number' 
+            className='form-control' 
+            value={price} />
+</div>
+
+<div className='form-group'>
+    <label className='text-muted'> Categoria </label>
+        <select 
+            onChange={handleChange('category')} 
+            className='form-control' 
+            >
+             <option value='5e3c30a1d2a9ff2b3cd22f8e'>Node</option>   
+        </select>
+</div>
+
+
+<div className='form-group'>
+    <label className='text-muted'>envio</label>
+        <select 
+            onChange={handleChange('shipping')} 
+            className='form-control' 
+            >
+             <option value='0'>No</option>
+             <option value='1'>Si</option>      
+        </select>
+</div>
+
+
+<div className='form-group'>
+    <label className='text-muted'>Cantidad?</label>
+        <input 
+            onChange={handleChange('quantity')} 
+            type='number' 
+            className='form-control' 
+            value={quantity} />
+</div>
+
+<button > Create Product </button>
+
+
+</form>
+
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+    )
+}
+
+
+
 
 //destructure 
 
@@ -19,7 +184,7 @@ return(
     >
         <div className='row'>
             <div className='col-md-8 offset-md-2'>
-                ....
+              { newPostForm()}
             </div>
         </div>
 
