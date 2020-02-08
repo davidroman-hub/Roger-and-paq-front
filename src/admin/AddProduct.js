@@ -2,7 +2,7 @@
 import React,{useState, useEffect} from 'react'
 import Layout from '../core/Layout'
 import {isAuth} from '../auth/index'
-import {Link} from 'react-router-dom'
+//import {Link} from 'react-router-dom'
 import { createProduct } from './apiAdmin'
 
 const AddProduct = () => {
@@ -59,7 +59,25 @@ const handleChange = name => event => {
 }
 
 const clickSubmit= (event) => { 
-    //
+    event.preventDefault()
+    setValues({...values, error:'', loading:true})
+    createProduct(user._id, token, formData)
+    .then(data => {
+        if(data.error){
+            setValues({...values, error:data.error})
+        }else{
+            setValues({
+                ...values,
+                name:'',//<-- this is the name
+                description:'',
+                photo:'',
+                price:'',
+                quantity:'',
+                loading:false,
+                createProduct:data.name // we need the name
+            })
+        }
+    })
 }
 
 
@@ -123,7 +141,8 @@ const newPostForm = () => {
             onChange={handleChange('category')} 
             className='form-control' 
             >
-             <option value='5e3c30a1d2a9ff2b3cd22f8e'>Node</option>   
+             <option value='5e3c30a1d2a9ff2b3cd22f8e'>Node</option>
+             <option value='5e3c30a1d2a9ff2b3cd22f8e'>php</option>      
         </select>
 </div>
 

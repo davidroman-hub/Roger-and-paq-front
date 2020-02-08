@@ -33,7 +33,7 @@ export const createProduct = (userId, token, product) => {
         method:"POST",
         headers:{
             Accept: "application/json",
-            "Content-Type":"application/json",
+            // "Content-Type":"application/json",
             Authorization:`Bearer ${token}`
         },
         body: product
