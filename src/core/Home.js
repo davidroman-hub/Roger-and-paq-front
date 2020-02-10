@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Layout from './Layout'
 import {getProducts} from './apiCore'
+import Card from './Card'
 
 const Home = () =>{
     
@@ -8,15 +9,15 @@ const Home = () =>{
 
 const [productsBySell, setProductsBySell] = useState([])
 const [productsByArrival, setProductsByArrival] = useState([])
-const [error,setError] = useState(false)
+const [error, setError] = useState(false)
 
 //Method 
 
-const loadProductsBySell = () => {
+const loadProductsBySell = () => { 
     getProducts('sold').then( data => {
-        if (data.error){
+        if(data.error) {
             setError(data.error)
-        } else {
+        }else {
             setProductsBySell(data)
         }
     })
@@ -34,15 +35,32 @@ const loadProductsByArrival = () => {
 
 
 useEffect(()=>{
-    loadProductsBySell()
     loadProductsByArrival()
-})
+    loadProductsBySell()
+    
+},[])//<-- tenia un problema con el bucle abierto estaba infinito
     
     return(
 <Layout title='Home page' description='Node react e-commer roger and paq'>
-    {JSON.stringify(productsBySell)}
+    {/* {JSON.stringify(productsBySell)}
     <hr />
-    {JSON.stringify(productsByArrival)}
+    {JSON.stringify(productsByArrival)} */}
+<h2 className='mb-4'>Lo mas nuevo</h2>
+<div className='row'>
+    {productsByArrival.map((products,i) =>(
+        <Card key={i} product={products}/>
+    ))}
+</div>
+
+<h2 className='mb-4'>Lo mas vendido</h2>
+<div className='row'>
+    {productsBySell.map((products,i) =>(
+        <Card key={i} product={products}/>
+    ))}
+</div>
+
+
+
 </Layout>
     )
 }
