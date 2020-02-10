@@ -3,7 +3,7 @@ import React,{useState, useEffect} from 'react'
 import Layout from '../core/Layout'
 import {isAuth} from '../auth/index'
 //import {Link} from 'react-router-dom'
-import { createProduct } from './apiAdmin'
+import { createProduct, getCategories } from './apiAdmin'
 
 const AddProduct = () => {
 
@@ -47,8 +47,23 @@ const {
 
 } = values;
 
+// load categories and set formData
+
+
+const init = () => {
+    getCategories().then( data => {
+        if(data.error){
+            setValues({...values, error: data.error})
+        } else{
+            setValues({...values, categories: data, formData : new FormData()})
+        }
+    })
+}
+
+
 useEffect(() => { 
-    setValues({...values, formData: new FormData()}); //<-- thats why we used here
+    // setValues({...values, formData: new FormData()}); //<-- thats why we used here
+    init()
 }, [])
 
 
@@ -140,9 +155,12 @@ const newPostForm = () => {
         <select 
             onChange={handleChange('category')} 
             className='form-control' 
-            >
-             <option value='5e3c30a1d2a9ff2b3cd22f8e'>Node</option>
-             <option value='5e3c30a1d2a9ff2b3cd22f8e'>php</option>      
+            >\
+            {/* cambiamos las opciones para encontrar categorias */}
+             <option >Elija una por favor</option> 
+            {categories && categories.map((c, i) => 
+            (<option key={i} 
+            value={c._id}> {c.name} </option>))}              
         </select>
 </div>
 
@@ -153,6 +171,7 @@ const newPostForm = () => {
             onChange={handleChange('shipping')} 
             className='form-control' 
             >
+             <option value='0'>Por favor selecciona</option>
              <option value='0'>No</option>
              <option value='1'>Si</option>      
         </select>
