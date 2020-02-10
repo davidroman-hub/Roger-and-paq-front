@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom'
 import { createProduct, getCategories} from './apiAdmin'
 
 const AddProduct = () => {
-
-    
     
     //State
 
