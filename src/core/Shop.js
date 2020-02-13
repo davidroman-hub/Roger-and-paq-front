@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import Layout from './Layout'
 import Card from './Card'
-import {getCategories} from './apiCore'
+import {getCategories, getFilteredProducts} from './apiCore'
 import Checkbox from './Checkbox'
 import{prices} from './FixedPrices'
 import RadioBox from './RadioBox'
@@ -14,19 +14,6 @@ const Shop = () => {
 const [myFilters, setMyFilters] = useState ({
     filters:{category:[], price:[]}
 })
-
-const handleFilters = (filters, filterBy) => {
-    //console.log('SHOP', filters,filterBy)
-    const newFilters = {...myFilters}
-    newFilters.filters[filterBy] = filters
-
-    // Filter for the price filter method
-    if(filterBy === 'price'){
-        let priceValues = handlePrice(filters)
-        newFilters.filters[filterBy] = priceValues;        
-    }
-    setMyFilters(newFilters)
-};
 
     //Handle price for the prices
 
@@ -43,6 +30,20 @@ const handleFilters = (filters, filterBy) => {
     }
 
 
+    const handleFilters = (filters, filterBy) => {
+        //console.log('SHOP', filters,filterBy)
+        const newFilters = {...myFilters}
+        newFilters.filters[filterBy] = filters
+    
+        // Filter for the price filter method
+        if(filterBy === 'price'){
+            let priceValues = handlePrice(filters)
+            newFilters.filters[filterBy] = priceValues;        
+        }
+        loadFilteredResults(myFilters.filters)//<-- for applicate the filters
+        setMyFilters(newFilters)
+    };
+
 
 
 
@@ -51,18 +52,48 @@ const handleFilters = (filters, filterBy) => {
      const [categories, setCategories] = useState([])
      const [error, setError] = useState(false)
 
-    const init = () => { 
-        getCategories().then ( data => {
-            if(data.error){
+   
+
+// Method for show the products with the filters
+
+// state
+
+const [limit, setLimit] = useState(6) //<-- limit of 6 products
+const [skip, setSkip] = useState(0)
+const [filteredResults, setFilteredResults] = useState([])
+
+
+const init = () => { 
+    getCategories().then ( data => {
+        if(data.error){
+            setError(data.error)
+        } else {
+            setCategories(data)
+        }
+    })
+}
+// for filter  method when you made a click
+const loadFilteredResults = newFilters => {
+    //console.log(newFilters)
+    getFilteredProducts(skip,limit,newFilters).then( data => {
+            if (data.error){
                 setError(data.error)
             } else {
-                setCategories(data)
+                setFilteredResults(data.data)
             }
-        })
-    }
+        } 
+    ) 
+}
+
+
+
+
+
+
 
 useEffect(()=>{
-    init()
+    init();
+    loadFilteredResults(skip,limit,myFilters.filters)
 }, []);
 
 
@@ -98,6 +129,7 @@ useEffect(()=>{
                 </div>
                 
                 <div className='col-8'>
+                    {JSON.stringify(filteredResults)}
                    {JSON.stringify(myFilters)}
                 </div>
             </div>
