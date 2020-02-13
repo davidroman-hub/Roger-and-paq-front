@@ -19,8 +19,29 @@ const handleFilters = (filters, filterBy) => {
     //console.log('SHOP', filters,filterBy)
     const newFilters = {...myFilters}
     newFilters.filters[filterBy] = filters
+
+    // Filter for the price filter method
+    if(filterBy === 'price'){
+        let priceValues = handlePrice(filters)
+        newFilters.filters[filterBy] = priceValues;        
+    }
     setMyFilters(newFilters)
-}
+};
+
+    //Handle price for the prices
+
+    const handlePrice = value => {
+        const data = prices;
+        let array = [];
+
+        for (let key in data) {
+            if(data[key]._id === parseInt(value)){
+                array = data[key].array
+            }
+        }
+        return array;
+    }
+
 
 
 
