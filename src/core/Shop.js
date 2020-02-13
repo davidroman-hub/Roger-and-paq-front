@@ -9,13 +9,30 @@ import RadioBox from './RadioBox'
 
 const Shop = () => { 
 
+
+/// Method to get the categories using state ///
+    // state to get the gategories:
+    const [categories, setCategories] = useState([])
+    const [error, setError] = useState(false)
+    
+    const init = () => { 
+        getCategories().then ( data => {
+            if(data.error){
+                setError(data.error)
+            } else {
+                setCategories(data)
+            }
+        })
+    }
+
 // Setting the filters with the category
     // state
 const [myFilters, setMyFilters] = useState ({
     filters:{category:[], price:[]}
 })
 
-    //Handle price for the prices
+    
+//Handle price for the prices
 
     const handlePrice = value => {
         const data = prices;
@@ -30,30 +47,6 @@ const [myFilters, setMyFilters] = useState ({
     }
 
 
-    const handleFilters = (filters, filterBy) => {
-        //console.log('SHOP', filters,filterBy)
-        const newFilters = {...myFilters}
-        newFilters.filters[filterBy] = filters
-    
-        // Filter for the price filter method
-        if(filterBy === 'price'){
-            let priceValues = handlePrice(filters)
-            newFilters.filters[filterBy] = priceValues;        
-        }
-        loadFilteredResults(myFilters.filters)//<-- for applicate the filters
-        setMyFilters(newFilters)
-    };
-
-
-
-
-/// Method to get the categories using state ///
-    // state to get the gategories:
-     const [categories, setCategories] = useState([])
-     const [error, setError] = useState(false)
-
-   
-
 // Method for show the products with the filters
 
 // state
@@ -63,15 +56,7 @@ const [skip, setSkip] = useState(0)
 const [filteredResults, setFilteredResults] = useState([])
 
 
-const init = () => { 
-    getCategories().then ( data => {
-        if(data.error){
-            setError(data.error)
-        } else {
-            setCategories(data)
-        }
-    })
-}
+
 // for filter  method when you made a click
 const loadFilteredResults = newFilters => {
     //console.log(newFilters)
@@ -84,21 +69,25 @@ const loadFilteredResults = newFilters => {
         } 
     ) 
 }
+const handleFilters = (filters, filterBy) => {
+    //console.log('SHOP', filters,filterBy)
+    const newFilters = {...myFilters}
+    newFilters.filters[filterBy] = filters
 
-
-
-
-
+    // Filter for the price filter method
+    if(filterBy === 'price'){
+        let priceValues = handlePrice(filters)
+        newFilters.filters[filterBy] = priceValues;        
+    }
+    loadFilteredResults(myFilters.filters)//<-- for applicate the filters to a price and products
+    setMyFilters(newFilters)
+};
 
 
 useEffect(()=>{
     init();
     loadFilteredResults(skip,limit,myFilters.filters)
 }, []);
-
-
-
-
 
 
     return(
