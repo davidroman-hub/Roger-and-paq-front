@@ -6,6 +6,23 @@ import Checkbox from './Checkbox'
 
 
 const Shop = () => { 
+
+// Setting the filters with the category
+    // state
+const [myFilters, setMyFilters] = useState ({
+    filters:{category:[], price:[]}
+})
+
+const handleFilters = (filters, filterBy) => {
+    //console.log('SHOP', filters,filterBy)
+    const newFilters = {...myFilters}
+    newFilters.filters[filterBy] = filters
+    setMyFilters(newFilters)
+}
+
+
+
+
 /// Method to get the categories using state ///
     // state to get the gategories:
      const [categories, setCategories] = useState([])
@@ -25,9 +42,7 @@ useEffect(()=>{
     init()
 }, []);
 
-const handleFilters = (filters, filterBy) => {
-    console.log('SHOP', filters,filterBy)
-}
+
 
 
 
@@ -50,7 +65,7 @@ const handleFilters = (filters, filterBy) => {
                 </div>
                 
                 <div className='col-8'>
-                    lado Derecho
+                   {JSON.stringify(myFilters)}
                 </div>
             </div>
         </Layout>
