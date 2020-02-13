@@ -23,7 +23,11 @@ const Shop = () => {
 
 useEffect(()=>{
     init()
-}, [])
+}, []);
+
+const handleFilters = (filters, filterBy) => {
+    console.log('SHOP', filters,filterBy)
+}
 
 
 
@@ -37,7 +41,11 @@ useEffect(()=>{
                 {/* {JSON.stringify(categories)} */}
                     <h4> Busca por categoria</h4>
                     <ul>
-                        <Checkbox categories={categories}/>
+                        <Checkbox categories={categories}
+                        handleFilters={ filters => 
+                        handleFilters(filters,"category")
+                        }
+                        />
                     </ul>
                 </div>
                 

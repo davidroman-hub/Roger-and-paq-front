@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react'
 
 // we need to get the props fo the categories for use it.
                 //props of categories
-const Checkbox = ({categories}) => {
+const Checkbox = ({categories, handleFilters}) => {
 
 // state for handle the categories, i mmean, when we cheked select the category.
 
@@ -23,8 +23,9 @@ const handleToggle = c => () => {
     } else {
         newCheckedCategoryId.splice(currentCategoryId, 1)
     }
-    console.log(newCheckedCategoryId)
-    setChecked(newCheckedCategoryId)
+    console.log(newCheckedCategoryId);
+    setChecked(newCheckedCategoryId);
+    handleFilters(newCheckedCategoryId);
 
 }
 
