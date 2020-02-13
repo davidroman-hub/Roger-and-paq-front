@@ -14,7 +14,7 @@ import Menu from './core/Menu'
 import Signin from './user/Signin'
 import Signup from './user/Signup'
 import Dashboard from './user/userDashboard'
-
+import Shop from './core/Shop'
 
 
 //Admin
@@ -29,6 +29,7 @@ const Routes = () => {
       
       <Switch>  
           <Route path = '/' exact component = { Home }/>
+          <Route path = '/Shop' exact component = { Shop }/>
           <Route path = '/signin' exact component = { Signin } /> 
           <Route path = '/signup' exact component = { Signup } /> 
 

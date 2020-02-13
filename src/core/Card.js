@@ -14,10 +14,10 @@ const Card = ({product}) => {
                     <p>${product.price}</p>
                     <Link to='/'/>
                     <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
-                        View Product
+                        Miralo!
                     </button>
                     <button className='btn btn-outline-warning mt-2 mb-2'>
-                        Add to card
+                       Agregar al carrito
                     </button>
                 </div>
             </div>
