@@ -28,7 +28,7 @@ const Shop = () => {
             }
         })
     }
-    
+
     const handleFilters = (filters, filterBy) => {
         //console.log('SHOP', filters,filterBy)
         const newFilters = {...myFilters}
@@ -84,7 +84,6 @@ const loadFilteredResults = newFilters => {
 }
 
 
-
 useEffect(()=>{
     init();
     loadFilteredResults(skip,limit,myFilters.filters)
@@ -119,8 +118,14 @@ useEffect(()=>{
                 </div>
                 
                 <div className='col-8'>
-                    {JSON.stringify(filteredResults)}
-                   {JSON.stringify(myFilters)}
+                    {/* {JSON.stringify(filteredResults)}
+                   {JSON.stringify(myFilters)} */}
+                   <h2 className='mb-4'>Productos</h2>
+                   <div className='row'>
+                       {filteredResults.map((product,i)=>(
+                           <Card key={i} product={product}/>
+                       ))}
+                   </div>
                 </div>
             </div>
         </Layout>
