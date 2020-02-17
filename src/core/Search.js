@@ -80,6 +80,9 @@ const searchForm = () => {
                 placeholder="Busqueda por Nombre"
             />
              </div>
+             <div className='btn input-group-appened' style={{border:'none'}}>
+                                <button >Busqueda</button>
+             </div>
          </span>
         </form>
     )
@@ -93,7 +96,7 @@ const searchForm = () => {
  return (
      <div className='row'>
          {/* <h2> Search bar {JSON.stringify(categories)}</h2> */}
-         <div className='container'>
+         <div className='container mb-3'>
             {searchForm()}
          </div>
      </div>
