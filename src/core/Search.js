@@ -44,15 +44,39 @@ useEffect(()=>{
 //First step is create the search form
 
 
-// second step is create the searchSubmit
+// second step is create the handleChange
 
-const handleChange = () => {
-    //
+const handleChange = (name) => event=> {
+    //set data for set the state 
+                                                //searched
+    setData({...data,[name]:event.target.value, searched:false})
 }
 
 // second step is create searchsubmit
-const searchSubmit = () => {
+const searchSubmit = (e) => {
     //
+    e.preventDefault()
+    searchData()
+
+}
+
+//thrid steap its create method searchData for made the request to the backend what we need to find
+
+const searchData = () =>{
+   // console.log(search,category)//<-- we need to send this information to the backend
+   // for fetch the correct product
+   // and here we gonna use the method list for  fetch the information list is in 'Apicore/
+    if(search){ // the fisrt thing we want to send, if not unde, after its the category                            
+        list({search:search || undefined, category:category})
+        .then( response =>{
+            if(response.error){
+                console.log(response.error)
+            } else {
+                setData({...data,results:response, search:true})
+            }
+        })
+    }
+
 }
 
 
@@ -98,6 +122,7 @@ const searchForm = () => {
          {/* <h2> Search bar {JSON.stringify(categories)}</h2> */}
          <div className='container mb-3'>
             {searchForm()}
+            {JSON.stringify(results)}
          </div>
      </div>
  )

@@ -50,6 +50,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) =>
 
 // method for list the input search
 // we have to install another packager called npm i query-string to
+// this method is for fectg the products in the method search data
 
 export const list = params => {
     const query = queryString.stringify(params)
