@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Layout from './Layout'
 import {getProducts} from './apiCore'
 import Card from './Card'
-
+import Search from './Search'
 const Home = () =>{
     
 //state for get the products from
@@ -45,6 +45,8 @@ useEffect(()=>{
     {/* {JSON.stringify(productsBySell)}
     <hr />
     {JSON.stringify(productsByArrival)} */}
+
+    <Search/>
 <h2 className='mb-4'>Lo mas nuevo</h2>
 <div className='row'>
     {productsByArrival.map((products,i) =>(

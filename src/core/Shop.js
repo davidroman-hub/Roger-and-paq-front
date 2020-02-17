@@ -5,7 +5,7 @@ import {getCategories, getFilteredProducts} from './apiCore'
 import Checkbox from './Checkbox'
 import{prices} from './FixedPrices'
 import RadioBox from './RadioBox'
-
+import Search from './Search'
 
 const Shop = () => { 
 // Setting the filters with the category and price
@@ -128,6 +128,7 @@ const loadMoreButton = () => {
         <Layout title='Tienda' 
         description='Busca y encuentra Ropa de tu agrado!' 
         className='container-fluid'>
+            <Search/>
             <div className='row'>
                 <div className='col-4'>
                 {/* {JSON.stringify(categories)} */}
