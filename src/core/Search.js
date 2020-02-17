@@ -79,6 +79,19 @@ const searchData = () =>{
 
 }
 
+// last step  // after when we found the data and made the new method to the back end we need to put 
+// in cards so, the method for render the data its this:
+
+const searchedProducts = ( results = []) => {
+    return (
+        <div className='row'>
+            {results.map((product,i)=>(
+                <Card key={i} product={product}/>
+            ))}
+        </div>
+    )
+}
+
 
 const searchForm = () => { 
 
@@ -106,6 +119,7 @@ const searchForm = () => {
              </div>
              <div className='btn input-group-appened' style={{border:'none'}}>
                                 <button >Busqueda</button>
+                             
              </div>
          </span>
         </form>
@@ -122,7 +136,12 @@ const searchForm = () => {
          {/* <h2> Search bar {JSON.stringify(categories)}</h2> */}
          <div className='container mb-3'>
             {searchForm()}
-            {JSON.stringify(results)}
+            {/* <--remember this are the results */}
+            {/* {JSON.stringify(results)} */}
+            <div className='container-fluid mb-3'>
+
+            </div>
+            {searchedProducts(results)}
          </div>
      </div>
  )
