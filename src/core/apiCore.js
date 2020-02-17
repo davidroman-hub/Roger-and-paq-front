@@ -1,5 +1,5 @@
 import {API} from '../Config'
-
+import queryString from 'query-string'
 
 //Get products method
 
@@ -46,4 +46,21 @@ export const getFilteredProducts = (skip, limit, filters = {}) =>
     .catch( err =>{
         console.log(err)
     }) 
+}
+
+// method for list the input search
+// we have to install another packager called npm i query-string to
+
+export const list = params => {
+    const query = queryString.stringify(params)
+    console.log('query', query)
+
+return fetch(`${API}/products?{query}`,{
+    method: 'GET'
+})
+    .then(response =>{
+        return response.json();
+    })
+    .catch(err => console.log(err));
+
 }
