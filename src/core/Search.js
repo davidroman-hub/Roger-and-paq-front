@@ -72,7 +72,7 @@ const searchData = () =>{
             if(response.error){
                 console.log(response.error)
             } else {
-                setData({...data,results:response, search:true})
+                setData({...data,results:response, searched:true})
             }
         })
     }
@@ -84,13 +84,32 @@ const searchData = () =>{
 
 const searchedProducts = ( results = []) => {
     return (
+        <div>
+             <h2 className="mt-4 mb-4">
+                {searchMessage(searched, results)}
+            </h2>
         <div className='row'>
             {results.map((product,i)=>(
                 <Card key={i} product={product}/>
             ))}
         </div>
+        </div>
     )
 }
+
+// and the last thing is  show the message to the users if they found or not something
+
+const searchMessage = (searched, results) => {
+    if(searched && results.length > 0){
+        return (`Encontramos ${results.length} productos para ti!`)
+    }
+    if( searched && results.length < 1){
+        return (`No encontramos lo que buscas :(`)
+    }
+}
+
+
+
 
 
 const searchForm = () => { 
