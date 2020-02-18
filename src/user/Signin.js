@@ -67,7 +67,7 @@ const signInForm = () =>(
                 </label>
             </p>
         </div> 
-            <button onClick={clickSubmit} >Submit</button> 
+            <button onClick={clickSubmit} >Entrar</button> 
     </form>
     
     )

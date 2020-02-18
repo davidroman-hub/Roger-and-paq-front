@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import ShowImage from './ShowImage'
 import moment from 'moment'
+import './Styles.scss'
 
 const Card = ({product , showViewProductButton = true}) => {
 
@@ -28,15 +29,16 @@ const showViewButton = (showViewProductButton) => {
 
     return (
         // <div className='col-4 mb-3'>
-            <div className='card'>
+            <div className='card' style={{'background':'#F7F7F7F7', 'border':'none'}}>
                 <div className='card-header name'>{product.name}</div>
                 <div className='card-body'>
-                    <p>{product.description.substring(0,100)}</p>
+                    
                     <ShowImage item={product} url='product'/>
                     
                     <p className='black-9'>${product.price}</p>
-                    <p className='black-8'>Categoria:{product.category &&
+                    <p className='black-8'>{product.category &&
                     product.category.name}</p>
+                    <p>{product.description.substring(0,20)}</p>
                     <p className='black-7'> Agregado el {moment(product.createdAt).fromNow()}</p>
                 
                     {/* <Link to={`/product/${product._id}`}>

@@ -87,12 +87,14 @@ const searchData = () =>{
 const searchedProducts = ( results = []) => {
     return (
         <div>
-             <h2 className="mt-4 mb-4">
+             <h2 className="ml-4 mb-4">
                 {searchMessage(searched, results)}
             </h2>
         <div className='row'>
             {results.map((product,i)=>(
-                <Card key={i} product={product}/>
+               <div key={i} className='col-5 mb-3 ml-4' >
+               <Card  product={product}/>
+           </div>  
             ))}
         </div>
         </div>
@@ -121,13 +123,11 @@ const searchForm = () => {
          <span className='input-group-text'>
              <div className='input-group input-group-lg'>
                 <div className='input-group-prepend'>
-                    <select className='btn mr-2 cat' onChange={handleChange('category')}>
-                        <option value='All' className='cat'>Categoria</option>
+                    <select className='btn mr-2' onChange={handleChange('category')}>
+                        <option value='All'>Categoria</option>
                             {/* method for implement the categories*/}
                             {categories.map((c,i)=>(
-                                <option key={i} value={c._id}>
-                                    {c.name}
-                                </option>
+                                <option key={i} value={c._id}>{c.name}</option>
                             ))}
 
                     </select>
@@ -139,7 +139,7 @@ const searchForm = () => {
             />
              </div>
              <div className='btn input-group-appened' style={{border:'none'}}>
-                     <button className='search-button-1' >Busqueda</button>
+                     <button className='input-group-text' >Busqueda</button>
                              
              </div>
          </span>
@@ -160,9 +160,9 @@ const searchForm = () => {
             {/* <--remember this are the results */}
             {/* {JSON.stringify(results)} */}
             <div className='container-fluid mb-3'>
-
+                {searchedProducts(results)}
             </div>
-            {searchedProducts(results)}
+           
          </div>
      </div>
  )

@@ -1,9 +1,34 @@
 
 // Search Component
+option{
+    @media (max-width: 769px){
+       font-size: 10px
+        }
+       
+}
 
-.search-button-1{
-    height: 50px;
+.input-group-text{
+    @media (max-width: 769px){
+        font-size: 10px
+         }
 }
-.cat{
-    font-size:20px
+
+
+// input[type='search']{
+//     @media (max-width: 769px){
+//         width:100px
+//       }    
+// }
+
+
+// card component
+.card {
+
+@media (max-width: 544px){
+    height: 600px;
+    width: 140px;
+    display: flex;
+    }
 }
+//showimage Component
+

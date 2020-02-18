@@ -132,7 +132,7 @@ const loadMoreButton = () => {
             <div className='row'>
                 <div className='col-4'>
                 {/* {JSON.stringify(categories)} */}
-                    <h4> Busca por categoria</h4>
+                    <h4> Categoria</h4>
                     <ul>
                         <Checkbox categories={categories}
                         handleFilters={ filters => 
@@ -141,7 +141,7 @@ const loadMoreButton = () => {
                         />
                     </ul>
 
-                    <h4>Filtrar por rango de precios</h4>
+                    <h4>Rango de precios</h4>
                         <div>
                             <RadioBox
                             prices={prices}

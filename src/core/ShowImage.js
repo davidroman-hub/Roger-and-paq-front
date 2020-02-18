@@ -1,6 +1,8 @@
 
 import React from 'react'
 import {API} from '../Config'
+import './Styles.scss'
+
 
 const ShowImage = ({item, url}) =>(
     <div className='product-img'>
