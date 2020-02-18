@@ -47,17 +47,19 @@ useEffect(()=>{
     {JSON.stringify(productsByArrival)} */}
 
     <Search/>
-<h2 className='mb-4'>Lo mas nuevo</h2>
+<h2 className='mb-4 ml-4'>Lo mas nuevo</h2>
 <div className='row'>
     {productsByArrival.map((products,i) =>(
-        <Card key={i} product={products}/>
+        <div key={i} className='col-5 mb-3 ml-4'>
+        <Card  product={products}/>
+    </div> 
     ))}
 </div>
 
-<h2 className='mb-4'>Lo mas vendido</h2>
+<h2 className='mb-4 ml-4'>Lo mas vendido</h2>
 <div className='row'>
     {productsBySell.map((products,i) =>(
-        <div key={i} className='col-10 mb-3'>
+        <div key={i} className='col-5 mb-3 ml-4'>
             <Card  product={products}/>
         </div>   
     ))}

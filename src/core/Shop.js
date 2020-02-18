@@ -158,7 +158,7 @@ const loadMoreButton = () => {
                    <h2 className='mb-4'>Productos</h2>
                    <div className='row'>
                        {filteredResults.map((product,i)=>(
-                           <div key={i} className='col-10 mb-3'>
+                           <div key={i} className='col-10 ml-4 mb-3'>
                                 <Card  product={product}/>
                             </div>   
                           

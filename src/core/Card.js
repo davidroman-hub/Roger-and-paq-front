@@ -27,9 +27,9 @@ const showViewButton = (showViewProductButton) => {
 
 
     return (
-        <div className='col-4 mb-3'>
+        // <div className='col-4 mb-3'>
             <div className='card'>
-                <div className='card-header'>{product.name}</div>
+                <div className='card-header name'>{product.name}</div>
                 <div className='card-body'>
                     <p>{product.description.substring(0,100)}</p>
                     <ShowImage item={product} url='product'/>
@@ -45,7 +45,7 @@ const showViewButton = (showViewProductButton) => {
                     </button>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
