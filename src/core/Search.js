@@ -1,6 +1,8 @@
 import React, { useState,useEffect} from 'react'
 import {getCategories, list} from './apiCore'
 import Card from "./Card"
+import './Styles.scss'
+
 
 const Search = () => { 
 
@@ -115,12 +117,12 @@ const searchMessage = (searched, results) => {
 const searchForm = () => { 
 
     return(
-        <form onSubmit={searchSubmit} className=''>
+        <form onSubmit={searchSubmit}>
          <span className='input-group-text'>
              <div className='input-group input-group-lg'>
                 <div className='input-group-prepend'>
-                    <select className='btn mr-2' onChange={handleChange('category')}>
-                        <option value='All'>Selecciona una Categoria</option>
+                    <select className='btn mr-2 cat' onChange={handleChange('category')}>
+                        <option value='All' className='cat'>Categoria</option>
                             {/* method for implement the categories*/}
                             {categories.map((c,i)=>(
                                 <option key={i} value={c._id}>
@@ -137,7 +139,7 @@ const searchForm = () => {
             />
              </div>
              <div className='btn input-group-appened' style={{border:'none'}}>
-                                <button >Busqueda</button>
+                     <button className='search-button-1' >Busqueda</button>
                              
              </div>
          </span>
