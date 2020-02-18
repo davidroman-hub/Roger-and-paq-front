@@ -37,14 +37,23 @@ const Product = (props) => {
     },[])
 
     return (
-        <Layout title='Product' 
-        description='product view'
+        <Layout title={product && product.name} 
+        description={
+            product &&
+            product.description &&
+            product.description.substring(0,100)
+        }
         className='container-fluid'
         >
-            product page
-        <h2 className='mb-4'>Single Product</h2>
+            
+        {/* <h2 className='mb-4'>Single Product</h2> */}
         <div className='row'>
-            {JSON.stringify(product)}
+            {/* {JSON.stringify(product)} */}
+            {
+                product &&
+                product.description &&
+                <Card product={product} showViewProductButton={false}/>
+            }
         </div>
         </Layout>
     )
