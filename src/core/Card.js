@@ -23,7 +23,23 @@ const showViewButton = (showViewProductButton) => {
     )
 }
 
+const showAddToCartButton = () => {
 
+    return (
+        <button className='btn btn-outline-warning mb-2'>
+        Agregar al Carrito
+     </button>
+    )
+}
+
+const showStock = (quantity) => {
+
+    return quantity > 0 ? <span className='badge badge-primary badge-pill'>En stock</span> 
+    : 
+
+    <span className='badge badge-primary badge-pill'> Sin Stock</span>
+
+}
 
 
 
@@ -35,21 +51,22 @@ const showViewButton = (showViewProductButton) => {
                     
                     <ShowImage item={product} url='product'/>
                     
-                    <p className='black-9'>${product.price}</p>
-                    <p className='black-8'>{product.category &&
+                    <p className='black-10'>${product.price}</p>
+                    <p className='black-9'>{product.category &&
                     product.category.name}</p>
                     <p>{product.description.substring(0,20)}</p>
-                    <p className='black-7'> Agregado el {moment(product.createdAt).fromNow()}</p>
+                    <p className='black-8'> Agregado el {moment(product.createdAt).fromNow()}</p>
                 
                     {/* <Link to={`/product/${product._id}`}>
                     <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
                         Ver más
                     </button>
                     </Link> */}
+                    {showStock(product.quantity)}
+                    <br/>
                     {showViewButton(showViewProductButton)}
-                    <button className='btn btn-outline-warning mb-2'>
-                       Agregar al Carrito
-                    </button>
+                    {showAddToCartButton()}
+                  
                 </div>
             </div>
         // </div>
