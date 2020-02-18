@@ -7,7 +7,7 @@ import AdminRoute from './auth/AdminRoute'
 
 import Home from './core/Home'
 import Menu from './core/Menu'
-
+import Product from './core/Product.js'
 
 // User
 
@@ -29,6 +29,7 @@ const Routes = () => {
       
       <Switch>  
           <Route path = '/' exact component = { Home }/>
+          <Route path = '/product/:productId' exact component = { Product }/>
           <Route path = '/Shop' exact component = { Shop }/>
           <Route path = '/signin' exact component = { Signin } /> 
           <Route path = '/signup' exact component = { Signup } /> 

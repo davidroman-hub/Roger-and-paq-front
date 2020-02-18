@@ -12,10 +12,11 @@ const Card = ({product}) => {
                     <p>{product.description.substring(0,100)}</p>
                     <ShowImage item={product} url='product'/>
                     <p>${product.price}</p>
-                    <Link to='/'/>
+                    <Link to={`/product/${product._id}`}>
                     <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
                         Ver más
                     </button>
+                    </Link>
                     <button className='btn btn-outline-warning mb-2'>
                        Agregar al Carrito
                     </button>
