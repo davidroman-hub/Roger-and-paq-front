@@ -20,7 +20,7 @@ const showItem = () =>{
            <h2> Tu Carrito tiene {`${item.length}`} Productos</h2>
             <hr/>
             {item.map((product,i)=>(
-                <Card key={i} product={product}/>
+                <Card key={i} product={product} showAddToCartButton={false}/>
             ))}
         </div>
     )

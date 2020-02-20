@@ -5,9 +5,10 @@ import moment from 'moment'
 import {addItem} from './cardHelpers'
 import './Styles.scss'
 
-const Card = ({product , showViewProductButton = true}) => {
+const Card = ({product , showViewProductButton = true, showAddToCartButton = true}) => {
 
-//State for the cvart redirection
+
+//State for the cart redirection
 
 const [redirect, setRedirect]= useState(false)
 
@@ -23,6 +24,14 @@ const shouldRedirect = redirect =>{
     }
 }
 
+
+const showAddToCart = (showAddToCartButton) => {
+    return showAddToCartButton && (
+        <button onClick={addToCart} className='btn btn-outline-warning mt-2 mb-2'>
+            Agregar al carrito
+        </button>
+    )
+}
 // when we have this we have to put the funtion on the button add to cart..
 
 
@@ -44,14 +53,14 @@ const showViewButton = (showViewProductButton) => {
     )
 }
 
-const showAddToCartButton = () => {
+// const showAddToCartButton = () => {
 
-    return (            // here
-        <button onClick={addToCart} className='btn btn-outline-warning mb-2'>
-        Agregar al Carrito
-     </button>
-    )
-}
+//     return (            // here
+//         <button onClick={addToCart} className='btn btn-outline-warning mb-2'>
+//         Agregar al Carrito
+//      </button>
+//     )
+// }
 
 const showStock = (quantity) => {
 
@@ -85,7 +94,7 @@ const showStock = (quantity) => {
                     {showStock(product.quantity)}
                     <br/>
                     {showViewButton(showViewProductButton)}
-                    {showAddToCartButton()}
+                    {showAddToCart(showAddToCartButton)}
                   
                 </div>
             </div>
