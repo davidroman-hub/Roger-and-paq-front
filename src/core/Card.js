@@ -5,6 +5,8 @@ import moment from 'moment'
 import { addItem, updateItem } from './cardHelpers'
 import './Styles.scss'
 
+
+
 const Card = ({product ,
               showViewProductButton = true, 
               showAddToCartButton = true,
@@ -101,11 +103,21 @@ const showCartUpdateOptions = cartUpdate => {
         <div className='input-group mb-3'>
             <div className='input-group-prepend'>
                 <span className='input-group-text'>
-                    Cantidad
+                    Cantidad (Máx 3)
                 </span>
                 {/* we need to know who it will be the product to we need to incr/dicr thats whywe use Id*/}
             </div>
-            <input type="number" className="form-control" value={count} onChange={handleChange(product._id)} />
+            {/* <select onChange={handleChange(product._id)}>
+                <option value={count}>1</option>
+                <option value={count}>2</option> 
+                <option value={count}>3</option> 
+            </select> */}
+
+             <input type="number"
+             className="form-contro"
+              max='3'
+              value={count} 
+              onChange={handleChange(product._id)} />
         </div>
     </div>
     )

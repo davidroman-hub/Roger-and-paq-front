@@ -48,3 +48,13 @@ font-size: 20px; //tam;o del logo
       
 }
 
+
+input[type=number]{
+    width:8%;
+
+    @media(max-width: 769px){
+        width:25%
+    }
+
+
+}
