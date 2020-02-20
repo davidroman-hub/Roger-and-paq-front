@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {signout, isAuth} from '../auth/index'
+import {itemTotal} from './cardHelpers'
 
 
 import Logo from './logo.png'
@@ -35,6 +36,16 @@ const Menu = ({history}) =>(
       <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> */}
    <li> <Link className="nav-link" style={isActive(history,'/')} to="/">Home</Link></li>
    <li> <Link className="nav-link" style={isActive(history,'/shop')} to="/shop">Tienda</Link></li>
+    <li> <Link className="nav-link" 
+              style={isActive(history,'/cart')} 
+              to="/cart">Carrito{""}
+              <sup>
+                <small className="cart-cadge">
+                  {itemTotal()}
+                </small>
+              </sup>
+              
+              </Link></li>
   {/* for the user conditional redirect  */}
 
     {isAuth() && isAuth().user.role === 0 &&(
