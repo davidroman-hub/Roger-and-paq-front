@@ -39,3 +39,14 @@ export const itemTotal = () => {
     }
     return 0;
 }
+
+// this method is for get all the elements in the cart and how the in the cart component
+
+export const getCart = () => { 
+    if(typeof window !== 'undefined'){
+        if(localStorage.getItem('cart')){
+            return JSON.parse(localStorage.getItem('cart'))
+        }
+    }
+    return [];
+}
