@@ -11,7 +11,9 @@ const Card = ({product ,
               showViewProductButton = true, 
               showAddToCartButton = true,
               cartUpdate = false,  //<-dicrement increment the same product
-              showRemoveProductButton = false
+              showRemoveProductButton = false,
+              setRun = f => f ,// default value of funtion 3.- as props
+              run = undefined// default value of undefined 4.- as props
             }) => {
 
 
@@ -88,9 +90,10 @@ const showStock = (quantity) => {
 //we need to create another method in card helpers called update and use at the final
 
 const handleChange = productId => event => {
+    setRun(!run)
     setCount (event.target.value < 1 ? 1 : event.target.value )
     if(event.target.value >= 1) {
-        updateItem(productId, event.target.value)
+        updateItem(productId, event.target.value);
     }
 }
 
@@ -126,7 +129,12 @@ const showCartUpdateOptions = cartUpdate => {
 const showRemoveButton = (showRemoveProductButton) => {
     return (
         showRemoveProductButton && (
-            <button onClick={() => removeItem (product._id)} className='btn btn-outline-danger mt-2 mb-2'>
+            <button 
+                onClick={() => { 
+                    removeItem (product._id);
+                    setRun(!run)
+                }} 
+                        className='btn btn-outline-danger mt-2 mb-2'>
                 Remover
             </button>
         )

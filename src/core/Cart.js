@@ -9,10 +9,14 @@ const Cart = () => {
     // state for show the items
     const [item, setItem] =useState([])
     
-    
+    //State for fix the loop // remove items 1.-
+    const [run, setRun] = useState(false)
+
+
+
 useEffect(()=> {
         setItem(getCart)
-    },[item])
+    },[run])
 
 const showItem = () =>{
     return (
@@ -25,7 +29,10 @@ const showItem = () =>{
                  showAddToCartButton={false}
                  cartUpdate={true}
                  showRemoveProductButton={true}
-                 />
+                // we need to pas as props ru and setRun 2.-
+                setRun={setRun}
+                run={run}
+                />
             ))}
         </div>
     )
