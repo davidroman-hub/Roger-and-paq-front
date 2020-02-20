@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import Layout from './Layout'
 import {getCart} from './cardHelpers'
 import Card from './Card'
+import Checkout from './Checkout'
 
 const Cart = () => {
 
@@ -55,6 +56,9 @@ return (
         </div>
         <div className="col-6">
         <p> show checkout options...</p>
+        <h2 className="mb-4"> Tu orden </h2>
+        <Checkout product={item}/>
+
         </div>
     </div>
 </Layout>
