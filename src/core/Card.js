@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {Link, Redirect} from 'react-router-dom'
 import ShowImage from './ShowImage'
 import moment from 'moment'
-import {addItem} from './cardHelpers'
+import { addItem, updateItem } from './cardHelpers'
 import './Styles.scss'
 
 const Card = ({product ,
@@ -14,8 +14,11 @@ const Card = ({product ,
 
 
 //State for the cart redirection
-
 const [redirect, setRedirect]= useState(false)
+
+//State for increment or dicrement the quantity
+const [count, setCount] = useState(product.count)
+
 
 //We import the funtion from cart helpers and we gonna execute 
 
@@ -79,11 +82,37 @@ const showStock = (quantity) => {
 }
 
 
+// handleChange fot change the quantyty of the products
+//we need to create another method in card helpers called update and use at the final
+
+const handleChange = productId => event => {
+    setCount (event.target.value < 1 ? 1 : event.target.value )
+    if(event.target.value >= 1) {
+        updateItem(productId, event.target.value)
+    }
+}
+
 // method for show if we want to add more quantity for the same product 
 
+
 const showCartUpdateOptions = cartUpdate => {
-    return cartUpdate && <div> incremen/dicrement</div>
+    return cartUpdate && (
+    <div> 
+        <div className='input-group mb-3'>
+            <div className='input-group-prepend'>
+                <span className='input-group-text'>
+                    Cantidad
+                </span>
+                {/* we need to know who it will be the product to we need to incr/dicr thats whywe use Id*/}
+            </div>
+            <input type="number" className="form-control" value={count} onChange={handleChange(product._id)} />
+        </div>
+    </div>
+    )
 }
+
+
+
 
 
 
@@ -98,7 +127,7 @@ const showCartUpdateOptions = cartUpdate => {
                     <p className='black-9'>{product.category &&
                     product.category.name}</p>
                     <p>{product.description.substring(0,20)}</p>
-                    <p className='black-8'> Agregado el {moment(product.createdAt).fromNow()}</p>
+                    <p className='black-8'> Agregado {moment(product.createdAt).fromNow()}</p>
                 
                     {/* <Link to={`/product/${product._id}`}>
                     <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
