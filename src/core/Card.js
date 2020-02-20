@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {Link, Redirect} from 'react-router-dom'
 import ShowImage from './ShowImage'
 import moment from 'moment'
-import { addItem, updateItem } from './cardHelpers'
+import { addItem, updateItem , removeItem} from './cardHelpers'
 import './Styles.scss'
 
 
@@ -10,8 +10,8 @@ import './Styles.scss'
 const Card = ({product ,
               showViewProductButton = true, 
               showAddToCartButton = true,
-              cartUpdate = false  //<-dicrement increment the same product
-            
+              cartUpdate = false,  //<-dicrement increment the same product
+              showRemoveProductButton = false
             }) => {
 
 
@@ -122,6 +122,16 @@ const showCartUpdateOptions = cartUpdate => {
     </div>
     )
 }
+ 
+const showRemoveButton = (showRemoveProductButton) => {
+    return (
+        showRemoveProductButton && (
+            <button onClick={() => removeItem (product._id)} className='btn btn-outline-danger mt-2 mb-2'>
+                Remover
+            </button>
+        )
+    )
+}
 
 
 
@@ -150,6 +160,7 @@ const showCartUpdateOptions = cartUpdate => {
                     <br/>
                     {showViewButton(showViewProductButton)}
                     {showAddToCart(showAddToCartButton)}
+                    {showRemoveButton(showRemoveProductButton)}
                     {showCartUpdateOptions(cartUpdate)}
                   
                 </div>

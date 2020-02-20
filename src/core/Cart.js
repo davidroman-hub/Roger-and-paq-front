@@ -12,7 +12,7 @@ const Cart = () => {
     
 useEffect(()=> {
         setItem(getCart)
-    },[])
+    },[item])
 
 const showItem = () =>{
     return (
@@ -24,6 +24,7 @@ const showItem = () =>{
                  product={product} 
                  showAddToCartButton={false}
                  cartUpdate={true}
+                 showRemoveProductButton={true}
                  />
             ))}
         </div>
