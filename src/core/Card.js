@@ -5,7 +5,12 @@ import moment from 'moment'
 import {addItem} from './cardHelpers'
 import './Styles.scss'
 
-const Card = ({product , showViewProductButton = true, showAddToCartButton = true}) => {
+const Card = ({product ,
+              showViewProductButton = true, 
+              showAddToCartButton = true,
+              cartUpdate = false  //<-dicrement increment the same product
+            
+            }) => {
 
 
 //State for the cart redirection
@@ -62,6 +67,8 @@ const showViewButton = (showViewProductButton) => {
 //     )
 // }
 
+// method for show in a button if exist stock or not
+
 const showStock = (quantity) => {
 
     return quantity > 0 ? <span className='badge badge-primary badge-pill'>En stock</span> 
@@ -69,6 +76,13 @@ const showStock = (quantity) => {
 
     <span className='badge badge-primary badge-pill'> Sin Stock</span>
 
+}
+
+
+// method for show if we want to add more quantity for the same product 
+
+const showCartUpdateOptions = cartUpdate => {
+    return cartUpdate && <div> incremen/dicrement</div>
 }
 
 
@@ -95,6 +109,7 @@ const showStock = (quantity) => {
                     <br/>
                     {showViewButton(showViewProductButton)}
                     {showAddToCart(showAddToCartButton)}
+                    {showCartUpdateOptions(cartUpdate)}
                   
                 </div>
             </div>
