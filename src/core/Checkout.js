@@ -13,6 +13,7 @@ const Checkout = ({product}) => {
     
 //State to take the token from braintree
 const [data, setData] = useState({
+    loading:false,
     success:false,
     clientToken:null,
     error:'',
@@ -50,7 +51,10 @@ const showDropIn = () => {
             {data.clientToken !== null && product.length > 0 ? (
                 <div>
                     <DropIn options={{
-                        authorization:data.clientToken
+                        authorization:data.clientToken,
+                        paypal:{
+                            flow:"vault"
+                        }
                     }} onInstance = {instance => (data.instance = instance)} />
                     <button onClick={buy} className="btn btn-success btn-block">Pagar</button>
                 </div>
@@ -62,7 +66,7 @@ const showDropIn = () => {
      // Buy method
 
      const buy = () => { 
-
+         setData({loading: true})
         // send the nonce to your server
         //nonce = data.instance.requestPaymentMethod()
         
@@ -93,12 +97,14 @@ const showDropIn = () => {
                      success:response.success
                 });
                 emptyCart(()=>{
-                    console.log('payment success and empyty cart')
+                    console.log('payment success and empyty cart');
+                    //setData({loading:false});
                 })
 
             })
             .catch(error => {
                 console.log(error)
+                setData({loading:false});
             })
 
             // Empty cart
@@ -147,6 +153,11 @@ const showDropIn = () => {
         )
     }
    
+    const showLoading = (loading) => (
+        loading && (
+            <h3>Cargando...</h3>
+        )
+    )
 
 
 
@@ -155,6 +166,7 @@ const showDropIn = () => {
     // <div>{JSON.stringify(product)}</div>
     <div>
         <h2>Total: ${getTotal()}</h2>
+        {showLoading(data.loading)}
         {showSuccess(data.success)}
         {showError(data.error)}
         {showCheckout()}
