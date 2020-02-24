@@ -48,14 +48,37 @@ const showDropIn = () => {
                     <DropIn options={{
                         authorization:data.clientToken
                     }} onInstance = {instance => (data.instance = instance)} />
-                    <button className="btn btn-success">Pagar</button>
+                    <button onClick={buy} className="btn btn-success">Pagar</button>
                 </div>
             ) : null}
         </div>
     )
 }
 
-    
+     // Buy method
+
+     const buy = () => { 
+
+        // send the nonce to your server
+        //nonce = data.instance.requestPaymentMethod()
+
+        let nonce;
+        let getNonce = data.instance.requestPaymentMethod()
+        .then(
+            data => {
+                console.log(data)
+                nonce = data.nonce
+                 // once you have nonce (card type, card number , etc..) send nonce as "paymentMethodNonce " to the backend
+                // and also total to be charged
+                console.log('send nonce and total process:', nonce, getTotal(product))
+            }
+        )
+        .catch( error => {
+            console.log('dropin error', error)
+            setData({...data, error: error})
+        })
+
+    }
 
 
     // method for get the total amount
@@ -79,6 +102,7 @@ const showDropIn = () => {
         )
     }
 
+   
    
 
 
