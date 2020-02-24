@@ -3,6 +3,8 @@ import { isAuth } from '../auth/index'
 import { Link } from 'react-router-dom'
 import { getBraintreeClientToken , processPayment} from './apiCore'
 import DropIn from 'braintree-web-drop-in-react'
+import { emptyCart } from './cardHelpers'
+
 
 
 
@@ -87,7 +89,13 @@ const showDropIn = () => {
             processPayment(userId,token, paymentData)
             .then(response => {
                 console.log(response)
-                setData({...data, success:response.success})
+                setData({...data,
+                     success:response.success
+                });
+                emptyCart(()=>{
+                    console.log('payment success and empyty cart')
+                })
+
             })
             .catch(error => {
                 console.log(error)
@@ -96,7 +104,7 @@ const showDropIn = () => {
             // Empty cart
             // create order            
             })
-        .catch( error => {
+            .catch( error => {
            // console.log('dropin error', error)
             setData({...data, error: error.message})
         })

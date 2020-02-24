@@ -91,3 +91,12 @@ export const removeItem = (productId) => {
     }
     return cart
 }
+
+//Empty cart after transaction is complete
+
+export const emptyCart = next => {
+    if (typeof window !== 'undefined') {
+        localStorage.removeItem('cart');
+        next();
+    }
+};
