@@ -93,31 +93,17 @@ export const listRelated = productId => {
 
 // to take the token from the backend from braintree i have to made another methods for take them
 
-// export const getBraintreeClientToken = (userId, token) => {
-//     return fetch(`${API}/braintree/getToken/${userId}`,{
-//         method:"GET",
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//             Authorization:`Bearer ${token}`
-//         }
-//     })
-//     .then ( response => {
-//         return response.json()
-//     })
-//     .catch( err => console.log(err))
-// }
-export const getBraintreeClientToken = (userId, token)=> {
-    return fetch(`${API}/braintree/getToken/${userId}`, {
-        method: "GET",
+export const getBraintreeClientToken = (userId, token) => {
+    return fetch(`${API}/braintree/getToken/${userId}`,{
+        method:"GET",
         headers: {
-            Accept:"application/json",
-            "Content-Type":"application/json",
-            Authorization: `Bearer ${token}`
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization:`Bearer ${token}`
         }
     })
-    .then( response => {
+    .then ( response => {
         return response.json()
     })
-    .catch(err => console.log(err))
+    .catch( err => console.log(err))
 }
