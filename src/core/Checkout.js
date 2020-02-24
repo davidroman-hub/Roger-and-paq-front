@@ -42,7 +42,9 @@ useEffect(()=> {
 
 const showDropIn = () => {
     return (
-        <div>
+        // onBlur is used when its an error on our pay method ,
+        // when you start to put something will disapear
+        <div onBlur={ ()=> setData({...data, error:""})}>
             {data.clientToken !== null && product.length > 0 ? (
                 <div>
                     <DropIn options={{
@@ -75,7 +77,7 @@ const showDropIn = () => {
         )
         .catch( error => {
             console.log('dropin error', error)
-            setData({...data, error: error})
+            setData({...data, error: error.message})
         })
 
     }
@@ -102,6 +104,11 @@ const showDropIn = () => {
         )
     }
 
+    const showError = error => {
+        return (
+        <div className="alert alert-danger" style={{display:error ? '' : 'none'}}>{error}</div>
+        )
+    }
    
    
 
@@ -112,6 +119,7 @@ const showDropIn = () => {
     // <div>{JSON.stringify(product)}</div>
     <div>
         <h2>Total: ${getTotal()}</h2>
+        {showError(data.error)}
         {showCheckout()}
         
     </div>
