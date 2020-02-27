@@ -121,7 +121,7 @@ let deliveryAddress = data.address
                 
                 const createOrderData ={ 
                     products:product,
-                    transaction_id:response.transaction_id,
+                    transaction_id:response.transaction.id,
                     amount:response.transaction.amount,
                     address:deliveryAddress
                 }
