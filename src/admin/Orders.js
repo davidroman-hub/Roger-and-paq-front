@@ -3,12 +3,15 @@ import React,{useState, useEffect} from 'react'
 import Layout from '../core/Layout'
 import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
-import { listOrders} from './apiAdmin'
+import { listOrders, getStatusValues} from './apiAdmin'
 import moment from 'moment'
 
 const Orders = () => {
 
     const [orders, setOrders] = useState([])
+
+    //for take the status
+    const [statusValues, setStatusValues] = useState([])
 
     const{user,token} = isAuth()
 
@@ -22,8 +25,44 @@ const Orders = () => {
         })
     }
 
+    //to get the status from back end
+
+    const loadStatusValues = () => {
+        getStatusValues(user._id, token).then(
+            data => {
+                if (data.error){
+                    console.log(data.error)
+                }else{
+                    setStatusValues(data)
+                }
+            }
+        )
+    }
+//to manage the status
+    const handleStatusChange = (e, orderId) => {
+        console.log('update order status')
+    }
+
+    // for show the status
+    const showStatus = (o) => {
+        return (
+            <div className='form-group'>
+            <h3 className='mark mb-4'>Status:{o.status}</h3>
+            <select className='form-control' 
+                 onChange={(e) => handleStatusChange(e, o._id)}>
+                <option>Update status</option>
+                {statusValues.map((status, index) => (
+                    <option key={index} value={status}>{status}</option>
+                ) )}
+
+            </select>
+        </div>
+        )
+    }
+
     useEffect(()=> {
-        loadOrders()
+        loadOrders();
+        loadStatusValues()
     },[])
 
     // const noOrders = orders => {
@@ -59,7 +98,8 @@ const Orders = () => {
                                 </h2>
                                 <ul className="list-group mb-2">
                                     <li className="list-group-item">
-                                        {o.status}
+                                        {/* {o.status} */}
+                                        {showStatus(o)}
                                     </li>
                                     <li className="list-group-item">
                                     Transaction ID: {o.transaction_id}
@@ -68,7 +108,7 @@ const Orders = () => {
                                         Total: ${o.amount}
                                     </li>
                                     <li className="list-group-item">
-                                        Ordered by: {o.user.name}
+                                        Ordenado por: {o.user.name}
                                     </li>
                                     <li className="list-group-item">
                                        Ordenado hace: {moment(o.createdAt).fromNow()}
@@ -92,13 +132,7 @@ const Orders = () => {
 
                                     {showInput('ID del producto', p._id)}
 
-                                   
-
-                                    
                                 </div>
-
-
-
                            ))}
                            
                             </div>
