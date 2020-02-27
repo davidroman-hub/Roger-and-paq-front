@@ -5,13 +5,48 @@ import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
 import { listOrders} from './apiAdmin'
 
-const Orders = ()=> {
+const Orders = () => {
 
+    const [orders, setOrders] = useState([])
 
+    const{user,token} = isAuth()
+
+    const loadOrders =() => {
+        listOrders(user._id, token).then( data => {
+            if (data.error){
+                console.log(data.error)
+            } else {
+                setOrders(data)
+            }
+        })
+    }
+
+    useEffect(()=> {
+        loadOrders()
+    },[])
+
+    const noOrders = orders => {
+        return orders.length < 1 ? <h2>No orders </h2> : null
+    };
 
     return (
-        <h3>hello there</h3>
+        <Layout title='Orders' 
+        description={`G' Day ${user.name}!, you can manage all the orders here`} 
+        >
+
+        <div className='row'>
+
+            <div className='col-md-8 offset-md-2'>
+                {noOrders(orders)}
+                {JSON.stringify(orders)}  
+
+            </div>
+        </div>
+
+
+        </Layout>
     )
+
 }
 
 export default Orders

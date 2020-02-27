@@ -62,17 +62,16 @@ export const getCategories = () => {
 }
 
 //orders in api dashboard
-
-export const listOrders = (userId,token) => { 
-    return fetch(`${API}/order/list`, {
-        method:"GET",
-        headers:{
+export const listOrders = (userId,token) => {
+    return fetch(`${API}/order/list/${userId}`, {
+        method: "GET",
+        headers: {
             Accept:"application/json",
-            Authorization:`Bearer ${token}`
-        }
+            Authorization: `Bearer ${token}`
+        },
     })
-    .then (response => { 
+    .then( response => {
         return response.json()
     })
-    .catch (err => console.log(err))
+    .catch(err => console.log(err))
 }
