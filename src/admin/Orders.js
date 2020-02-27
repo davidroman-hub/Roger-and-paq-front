@@ -68,7 +68,7 @@ const Orders = () => {
                                         Total: ${o.amount}
                                     </li>
                                     <li className="list-group-item">
-                                        {/* Ordered by: {o.user.name} */}
+                                        Ordered by: {o.user.name}
                                     </li>
                                     <li className="list-group-item">
                                        Ordenado hace: {moment(o.createdAt).fromNow()}
@@ -78,16 +78,55 @@ const Orders = () => {
                                     </li>
                                 </ul>
                         <h3 className="mt-4 mb-4 font-italic"> Total products in the order:{o.products.length}</h3>
+                           
+                           {o.products.map((p, pIndex) => (
+                                <div className="mb-4"
+                                key={pIndex}
+                                style={{ padding: '20px', border:'1px solid indigo'}}>
+                                    
+                                    {showInput('Nombre del producto', p.name)}
+
+                                    {showInput('Precio del producto $', p.price)}
+
+                                    {showInput('Total del producto ', p.count)}
+
+                                    {showInput('ID del producto', p._id)}
+
+                                   
+
+                                    
+                                </div>
+
+
+
+                           ))}
+                           
                             </div>
                         )
                 })}
-            </div>
+                </div>
             </div>
         </div>
         
         )
     }
         
+    const showInput = (key, value) => {
+        return (
+            <div className='input-group mb-2 mr-sm-2'>
+                <div className='input-group-prepand'>
+                    <div className='input-group-text'>
+                        {key}
+                    </div>
+                    <input type='text'
+                     value={value} 
+                     className='form-control'
+                     readOnly
+                     />
+                </div>
+            </div>
+        )
+    }
     
 
     return (
