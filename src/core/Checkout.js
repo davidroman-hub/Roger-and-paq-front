@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom'
 import { getBraintreeClientToken , processPayment} from './apiCore'
 import DropIn from 'braintree-web-drop-in-react'
 import { emptyCart } from './cardHelpers'
+import {createOrder} from './apiCore'
 
 
 
 
 
 const Checkout = ({product}) => {
+    
+
     
 //State to take the token from braintree
 const [data, setData] = useState({
@@ -43,6 +46,10 @@ useEffect(()=> {
     getToken(userId, token)
 },[])
 
+const handleAddress =  event => {
+    setData({...data, address:event.target.value})
+}
+
 const showDropIn = () => {
     return (
         // onBlur is used when its an error on our pay method ,
@@ -50,6 +57,18 @@ const showDropIn = () => {
         <div onBlur={ ()=> setData({...data, error:""})}>
             {data.clientToken !== null && product.length > 0 ? (
                 <div>
+                    <div className="gorm-group mb-3">
+                        <label className='text-muted'>
+                            Direccion de Envio
+                        </label>
+                        <textarea
+                        onChange={handleAddress}
+                        className='form-control'
+                        value={data.address}
+                        placeholder='Escribe tu direccion de envio aqui C.P, calle, Ref, etc..'/>
+                    </div>
+
+
                     <DropIn options={{
                         authorization:data.clientToken,
                         paypal:{
@@ -62,6 +81,10 @@ const showDropIn = () => {
         </div>
     )
 }
+
+//delivery address
+
+let deliveryAddress = data.address
 
      // Buy method
 
@@ -93,6 +116,18 @@ const showDropIn = () => {
             processPayment(userId,token, paymentData)
             .then(response => {
                 console.log(response)
+               
+                ///Create order///
+                
+                const createOrderData ={ 
+                    products:product,
+                    transaction_id:response.transaction_id,
+                    amount:response.transaction.amount,
+                    address:deliveryAddress
+                }
+                createOrder(userId, token,createOrderData)
+               
+               
                 setData({...data,
                      success:response.success
                 });
@@ -147,7 +182,7 @@ const showDropIn = () => {
    
     const showSuccess = success => {
         return (
-            <div className="alert alert-success" style={{display:success ? '':'none'}}>
+            <div className="alert alert-info" style={{display:success ? '':'none'}}>
                 Gracias por tu pago!
             </div>
         )
