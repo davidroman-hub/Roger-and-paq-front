@@ -9,7 +9,7 @@ import Home from './core/Home'
 import Menu from './core/Menu'
 import Product from './core/Product.js'
 import Cart from './core/Cart'
-
+import Orders from './admin/Orders'
 
 // User
 
@@ -46,7 +46,7 @@ const Routes = () => {
               <AdminRoute path='/admin/dashboard' exact component = { AdminDashboard}/>
               <AdminRoute path='/create/categories' exact component = {AddCategory}/>
               <AdminRoute path='/create/product' exact component = {AddProduct}/>
-
+              <AdminRoute path='/admin/orders' exact component = {Orders}/>
       </Switch>
     </BrowserRouter>
   )
