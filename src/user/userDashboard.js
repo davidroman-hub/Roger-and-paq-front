@@ -4,7 +4,7 @@ import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
 import Profile from './Profile'
 import {getPurchaseHistory} from './apiUser'
-
+import moment from 'moment'
 
 
 const Dashboard = () => {
@@ -30,7 +30,6 @@ const Dashboard = () => {
     useEffect(()=>{
         init(_id, token)
     },[])
-
 
 
 
@@ -78,7 +77,27 @@ const Dashboard = () => {
             <h3 className='card-header'>Historial de mis Compras</h3> 
             <ul className='list-group'>
               <li className='list-group-item'>
-                 {JSON.stringify(history)}
+                 {/* {JSON.stringify(history)} */}
+                 {history.map((h, i) => {
+                            return (
+                                <div>
+                                    <hr />
+                                    {h.products.map((p, i) => {
+                                        return (
+                                            <div key={i}>
+                                                <h6>Product name: {p.name}</h6>
+                                                <h6>Product price: ${p.price}</h6>
+                                                <h6>
+                                                    Purchased date:{" "}
+                                                    {moment(p.createdAt).fromNow()}
+                                                </h6>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })}
+                 
               </li>
            </ul>
       </div>
