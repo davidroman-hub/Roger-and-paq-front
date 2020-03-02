@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../core/Layout'
 import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
-
+import Profile from './Profile'
 
 
 
@@ -19,7 +19,7 @@ const Dashboard = () => {
                             <Link className='nav-link' to='/cart'>Mi Carrito</Link>
                         </li>
                         <li className='list-group-item'>
-                            <Link className='nav-link' to='/profile/update'>Actualizar mi información</Link>
+                            <Link className='nav-link' to={`/profile/${_id}`}>Actualizar mi información</Link>
                         </li>
                     </ul>
             </div>

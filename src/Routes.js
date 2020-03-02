@@ -17,7 +17,7 @@ import Signin from './user/Signin'
 import Signup from './user/Signup'
 import Dashboard from './user/userDashboard'
 import Shop from './core/Shop'
-
+import Profile from './user/Profile'
 
 //Admin
 import AdminDashboard from './user/AdminDashboard'
@@ -39,7 +39,7 @@ const Routes = () => {
 
           {/* USER Routes */}
           <PrivateRoute path='/user/dashboard' exact component = { Dashboard}/>
-
+          <PrivateRoute path='/profile/:userId' exact component = { Profile }/>
 
               {/* ADMIN Routes */}
 
