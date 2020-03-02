@@ -37,6 +37,45 @@ useEffect(() => {
    
 },[])
 
+const handleChange = (e) => {
+    //
+}
+
+const clickSubmit = (e) => {
+    //
+}
+
+const profileUpdate = (name,email,password) => {
+    return (
+        <div className="form-group">
+            <label className='text-muted'>Nombre</label>
+            <input type='text'
+            onChange={handleChange('name')}
+            className='form-control'
+            value={name}/>
+        
+        
+        <div className="form-group">
+            <label className='text-muted'>Email</label>
+            <input type='email'
+            onChange={handleChange('email')}
+            className='form-control'
+            value={email}/>
+        </div>
+
+      <div className="form-group">
+        <label className='text-muted'>Contraseña</label>
+        <input type='password'
+        onChange={handleChange('password')}
+        className='form-control'
+        value={password}/>
+    </div>
+    <button  onClick={clickSubmit} className='btn btn-primary'>Actualizar</button>
+  </div>
+        
+    )
+}
+
 return (
     // <h1> User profile</h1>
 
@@ -46,6 +85,7 @@ return (
     >
         <h2>Actualiza usuario</h2>
         {JSON.stringify(values)}
+        {profileUpdate(name,email, password)}
 
     </Layout>
     )
