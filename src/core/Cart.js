@@ -55,7 +55,7 @@ return (
         {item.length > 0 ? showItem(item) : notItemMessage()}
         </div>
         <div className="col-6">
-        <p> show checkout options...</p>
+        {/* <p> show checkout options...</p> */}
         <h2 className="mb-4"> Tu orden </h2>
         <Checkout product={item}/>
 

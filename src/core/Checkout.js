@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import { isAuth } from '../auth/index'
-import { Link } from 'react-router-dom'
+import { Link ,Redirect} from 'react-router-dom'
 import { getBraintreeClientToken , processPayment} from './apiCore'
 import DropIn from 'braintree-web-drop-in-react'
 import { emptyCart } from './cardHelpers'
@@ -43,7 +43,8 @@ const getToken = (userId, token) => {
     )
 }
 useEffect(()=> {
-    getToken(userId, token)
+    getToken(userId, token);
+    
 },[])
 
 const handleAddress =  event => {
@@ -183,7 +184,7 @@ let deliveryAddress = data.address
     const showSuccess = success => {
         return (
             <div className="alert alert-info" style={{display:success ? '':'none'}}>
-                Gracias por tu pago!
+                Gracias por tu pago! Ve a tu perfil para ver la orden
             </div>
         )
     }
@@ -194,8 +195,6 @@ let deliveryAddress = data.address
         )
     )
 
-
-
     return (
 
     // <div>{JSON.stringify(product)}</div>
@@ -205,6 +204,7 @@ let deliveryAddress = data.address
         {showSuccess(data.success)}
         {showError(data.error)}
         {showCheckout()}
+       
         
     </div>
   

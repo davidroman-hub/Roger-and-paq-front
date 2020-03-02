@@ -108,7 +108,7 @@ return (
     className='container-fluid'
     >
         <h2>Actualiza usuario</h2>
-        {JSON.stringify(values)}
+        {/* {JSON.stringify(values)} */}
         {profileUpdate(name,email, password)}
         {redirectUser(success)}
     </Layout>
