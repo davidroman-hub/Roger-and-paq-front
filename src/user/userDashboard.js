@@ -102,15 +102,18 @@ const Dashboard = () => {
                                     {h.products.map((p, i) => {
                                         return (
                                             <div key={i}>
+                                                <br/>
                                                 <h6>Nombre del Producto: {p.name}</h6>
+                                                <h6>Cantidad del Producto: {p.count}</h6>
                                                 <h6>Precio: ${p.price}</h6>
                                                 <h6>
                                                     comprado el dia:{" "}
-                                                    {h.createdAt}
-                                                    
+                                                    {h.createdAt}                                                    
                                                 </h6>
                                                 <h6>Id transaccion:{h.transaction_id}</h6>
                                                 <h6>Id orden:{h._id}</h6>
+                                                <br/>
+                                                <h6 style={{color: 'orange'}}>Estatus de la orden:{h.status}</h6>
                                             </div>
                                         );
                                     })}
@@ -120,19 +123,6 @@ const Dashboard = () => {
                  
               </li>
            </ul>
-        {/* <h6>Orden</h6>
-        {orders.map((o, oIndex)=>{
-            return (
-                <div key={oIndex}>
-                <ul>
-                    <li className='list-group-item'>
-                    Ordenado hace: {moment(o.createdAt).fromNow()}
-                    </li>
-                </ul>
-                </div>
-            )
-        })} */}
-
       </div>
         )
     }
