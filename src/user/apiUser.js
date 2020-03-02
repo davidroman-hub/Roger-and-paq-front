@@ -2,20 +2,22 @@ import {API} from '../Config'
 //Read//
 // we need to read the user information first for update after
 
-export const read = (userId, token) => {
-    return fetch(`${API}/user/${userId}`,{
-        method:"GET",
+
+export const read =(userId, token) => {
+    return fetch(`${API}/user/${userId}`, {
+        method: "GET",
         headers: {
-            Accept: "application/json",
+            Accept:"application/json",
             "Content-Type":"application/json",
-            Authorization:`Bearer ${token}`
-        }
+            Authorization: `Bearer ${token}`
+        },
     })
-    .then(response => {
-        return response
-    })
-    .catch(err => console.log(err))
-}
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
 
 
 

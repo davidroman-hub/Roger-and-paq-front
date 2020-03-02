@@ -7,6 +7,7 @@ import {read, update, updateUser} from './apiUser'
 
 const Profile = ({match}) => { 
 
+
 const [values, setValues] = useState ({
     name:'',
     email:'',
@@ -14,16 +15,27 @@ const [values, setValues] = useState ({
     error:false,
     success:false
 })
+const {token} = isAuth()
 
 const {name,email,password,error,success} =values
 
 const init = (userId) => {
-    console.log(userId)
+    // console.log(userId)-- user id in the console to see waht we are sending
+    read(userId,token).then(
+        data => {
+            if (data.error){
+                setValues({...values,error:true})
+            } else {
+                setValues({...values, name:data.name, email:data.email})
+            }
+        }
+    ) 
 }
 
 useEffect(() => {
     init(match.params.userId)
-})
+   
+},[])
 
 return (
     // <h1> User profile</h1>
@@ -33,6 +45,7 @@ return (
     className='container-fluid'
     >
         <h2>Actualiza usuario</h2>
+        {JSON.stringify(values)}
 
     </Layout>
     )
