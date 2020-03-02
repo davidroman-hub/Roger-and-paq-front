@@ -4,10 +4,26 @@ import {isAuth} from '../auth/index'
 import {Link} from 'react-router-dom'
 import Profile from './Profile'
 import {getPurchaseHistory} from './apiUser'
+import {listOrders} from '../admin/apiAdmin'
 import moment from 'moment'
 
 
 const Dashboard = () => {
+
+    /// orders ///
+
+    const [orders, setOrders] = useState([])
+    const {user} = isAuth
+
+    const loadOrders =() => {
+        listOrders(_id, token).then( data => {
+            if (data.error){
+                console.log(data.error)
+            } else {
+                setOrders(data)
+            }
+        })
+    }
 
 
     const [history, setHistory] = useState([])//<--- for the purchase history
@@ -28,7 +44,8 @@ const Dashboard = () => {
     } 
 
     useEffect(()=>{
-        init(_id, token)
+        init(_id, token);
+        loadOrders()
     },[])
 
 
@@ -85,12 +102,15 @@ const Dashboard = () => {
                                     {h.products.map((p, i) => {
                                         return (
                                             <div key={i}>
-                                                <h6>Product name: {p.name}</h6>
-                                                <h6>Product price: ${p.price}</h6>
+                                                <h6>Nombre del Producto: {p.name}</h6>
+                                                <h6>Precio: ${p.price}</h6>
                                                 <h6>
-                                                    Purchased date:{" "}
-                                                    {moment(p.createdAt).fromNow()}
+                                                    comprado el dia:{" "}
+                                                    {h.createdAt}
+                                                    
                                                 </h6>
+                                                <h6>Id transaccion:{h.transaction_id}</h6>
+                                                <h6>Id orden:{h._id}</h6>
                                             </div>
                                         );
                                     })}
@@ -100,6 +120,19 @@ const Dashboard = () => {
                  
               </li>
            </ul>
+        {/* <h6>Orden</h6>
+        {orders.map((o, oIndex)=>{
+            return (
+                <div key={oIndex}>
+                <ul>
+                    <li className='list-group-item'>
+                    Ordenado hace: {moment(o.createdAt).fromNow()}
+                    </li>
+                </ul>
+                </div>
+            )
+        })} */}
+
       </div>
         )
     }

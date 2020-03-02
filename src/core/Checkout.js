@@ -10,7 +10,7 @@ import {createOrder} from './apiCore'
 
 
 
-const Checkout = ({product}) => {
+const Checkout = ({product,setRun = f => f, run = undefined}) => {
     
 
     
@@ -127,24 +127,26 @@ let deliveryAddress = data.address
                     address:deliveryAddress
                 }
                 createOrder(userId, token,createOrderData)
-               
-               
-                setData({...data,
-                     success:response.success
-                });
-                emptyCart(()=>{
-                    console.log('payment success and empyty cart');
-                    //setData({loading:false});
+               .then(response => {
+                   emptyCart(() => {
+                       setRun(!run);
+                       console.log('payment success and empyty cart');
+                       setData({
+                           loading:false,
+                           success:true
+                       })
+                   })
+               })
+               .catch(error => {
+                console.log(error)
+                setData({loading:false});
                 })
-
+               
             })
             .catch(error => {
                 console.log(error)
                 setData({loading:false});
-            })
-
-            // Empty cart
-            // create order            
+                })
             })
             .catch( error => {
            // console.log('dropin error', error)
