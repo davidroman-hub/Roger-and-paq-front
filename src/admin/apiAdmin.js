@@ -110,3 +110,67 @@ export const updateOrderStatus = (userId,token,orderId,status) => {
     })
     .catch(err => console.log(err))
 }
+
+/**
+ * 
+ * to perform crud on product to manage them
+ */
+
+ /// get all the products
+
+ export const getProducts= () => {
+    return fetch(`${API}/products`, {
+        method: 'GET'
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
+ //get a single product
+ export const getProduct = (productId) => {
+    return fetch(`${API}/product/${productId}`, {
+        method: 'GET'
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
+ // update single product
+
+ export const updateProduct = (productId,userId, token,product) => {
+    return fetch(`${API}/product/${productId}/${userId}`, {
+        method: "PUT",
+        headers: {
+            Accept:"application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: product
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
+
+ // delete single product
+
+ export const deleteProduct = (productId,userId, token) => {
+    return fetch(`${API}/product/${productId}/${userId}`, {
+        method: "DELETE",
+        headers: {
+            Accept:"application/json",
+            "Content-Type":"application/json",
+            Authorization: `Bearer ${token}`
+        },
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
