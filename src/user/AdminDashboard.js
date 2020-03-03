@@ -25,6 +25,9 @@ const AdminDashboard= () => {
                         <li className='list-group-item'>
                             <Link className='nav-link' to='/admin/orders'>Ver ordenes de clientes</Link>
                         </li>
+                        <li className='list-group-item'>
+                            <Link className='nav-link' to='/admin/product'>Gestionar Productos</Link>
+                        </li>
                     </ul>    
                 </div>
             )
