@@ -9,8 +9,8 @@ const Signin = () =>{
 
     //state
     const [values, setValues] = useState({
-        email:'jobroman8999@gmail.com',
-        password:'12345678',
+        email:'',
+        password:'',
         error:'',
         loading:false,
         redirectToReferrer: false, // to redirect qhen the sign in its succes
