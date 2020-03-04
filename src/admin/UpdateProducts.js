@@ -6,8 +6,8 @@ import { getProduct, getCategories, updateProduct} from './apiAdmin'
 
 const UpdateProduct = ({match}) => {
 
-
-
+    
+    
     //State
 
     const [values, setValues] = useState({  //<-- have to be an object because we gonna send props
@@ -85,7 +85,7 @@ const UpdateProduct = ({match}) => {
 
 
 
-
+        
     useEffect(() => { 
         // setValues({...values, formData: new FormData()}); //<-- thats why we used here
         init(match.params.productId);
@@ -103,8 +103,8 @@ const UpdateProduct = ({match}) => {
     const clickSubmit = (event) => {
       event.preventDefault()
       setValues({...values, error:'', loading: true}) 
-
-
+      
+      
       updateProduct(match.params.productId, user._id, token, formData) //<-- the method back end and apiAdmin
       .then(data => { 
           if(data.error) { 
@@ -119,12 +119,12 @@ const UpdateProduct = ({match}) => {
                   quantity:'',
                   loading:false,
                   error: false,                
-                  redirectToProfile:false,
+                  redirectToProfile:true,
                   createdProduct:data.name //we need the name 
               })
           }
       })
-
+      
     };
 
 
@@ -132,9 +132,9 @@ const UpdateProduct = ({match}) => {
 
     const newPostForm = () => (
         <form className='mb-3' onSubmit={clickSubmit}>
-
-            <h4>Nueva Foto</h4>
-
+        
+            <h4>Post Photo</h4>
+        
             <div className='form-group'>
                 <label className='btn btn-secondary'>
                     <input 
@@ -147,7 +147,7 @@ const UpdateProduct = ({match}) => {
 
 
             <div className='form-group'>
-                <label className='text-muted'> Nombre </label>
+                <label className='text-muted'> Name </label>
                     <input 
                         onChange={handleChange('name')} 
                         type='text' 
@@ -157,7 +157,7 @@ const UpdateProduct = ({match}) => {
 
 
             <div className='form-group'>
-                <label className='text-muted'> Descripción </label>
+                <label className='text-muted'> Description </label>
                     <textarea 
                         onChange={handleChange('description')}  
                         className='form-control' 
@@ -165,7 +165,7 @@ const UpdateProduct = ({match}) => {
             </div>
 
             <div className='form-group'>
-                <label className='text-muted'> Precio </label>
+                <label className='text-muted'> Price </label>
                     <input 
                         onChange={handleChange('price')} 
                         type='number' 
@@ -174,7 +174,7 @@ const UpdateProduct = ({match}) => {
             </div>
 
             <div className='form-group'>
-                <label className='text-muted'> Categoria </label>
+                <label className='text-muted'> Category </label>
                     <select 
                         onChange={handleChange('category')} 
                         className='form-control' 
@@ -186,23 +186,23 @@ const UpdateProduct = ({match}) => {
                             </option>))}
                     </select>
             </div>
-
+            
 
             <div className='form-group'>
-                <label className='text-muted'> Envio </label>
+                <label className='text-muted'> Shipping </label>
                     <select 
                         onChange={handleChange('shipping')} 
                         className='form-control' 
                         >
                          <option >Please select</option> 
                          <option value='0'>No</option>
-                         <option value='1'>Si</option>      
+                         <option value='1'>yes</option>      
                     </select>
             </div>
 
 
             <div className='form-group'>
-                <label className='text-muted'> Cantidad </label>
+                <label className='text-muted'> Quantity </label>
                     <input 
                         onChange={handleChange('quantity')} 
                         type='number' 
@@ -210,8 +210,8 @@ const UpdateProduct = ({match}) => {
                         value={quantity} />
             </div>
 
-            <button className='btn btn-outline-primary'>Actualizar</button>
-
+            <button className='btn btn-outline-primary'>Update Product </button>
+            
 
         </form>
     )
@@ -251,12 +251,12 @@ const redirectUser = () => {
 
 
     return(
-        <Layout title='Actualizar un Producto' 
-        description={`G' Day ${user.name}!, Listo para actualizar el producto?`} 
+        <Layout title='Add a new Product' 
+        description={`G' Day ${user.name}!, ready to add new product?`} 
         >
-
+        
         <div className='row'>
-
+          
             <div className='col-md-8 offset-md-2'>
                   {showLoading()}
                   {showSuccess()}
@@ -267,7 +267,7 @@ const redirectUser = () => {
             </div>
         </div>
 
-
+           
         </Layout>
 
 
@@ -275,4 +275,4 @@ const redirectUser = () => {
 
 }
 
-export default UpdateProduct 
+export default UpdateProduct
