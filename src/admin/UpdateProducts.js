@@ -210,7 +210,7 @@ const UpdateProduct = ({match}) => {
                         value={quantity} />
             </div>
 
-            <button className='btn btn-outline-primary'>Update Product </button>
+            <button className='btn btn-outline-primary'>actualizar </button>
             
 
         </form>
